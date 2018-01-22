@@ -3,6 +3,6 @@
     // Enum for type of crewman
     public enum CrewmanType
     {
-        AircraftPilot, NavigatorOfficer, RadioOperator, AirHostess
+        Captain, AircraftPilot, NavigatorOfficer, RadioOperator, AirHostess
     }
 }

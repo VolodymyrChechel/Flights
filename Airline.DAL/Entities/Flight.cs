@@ -5,15 +5,18 @@ using System.Security.Cryptography;
 
 namespace Airline.DAL.Entities
 {
-    public class Voyage
+    /// <summary>
+    /// Represents fligh table with destination, departure city, time and regularity
+    /// </summary>
+    public class Flight
     {
         [Key]
         public string Id { get; set; }
         public Airport From { get; set; }
         public Airport To { get; set; }
-        public DateTime DepartureTime { get; set; }
-        public DateTime ArrivalTime { get; set; }
+        public DateTime PlannedDepartureTime { get; set; }
+        public TimeSpan PlannedFlightTime { get; set; }
 
-        public ICollection<Crew> Crews { get; set; }
+        
     }
 }
