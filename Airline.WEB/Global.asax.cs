@@ -11,6 +11,8 @@ namespace Airline.WEB
     {
         protected void Application_Start()
         {
+            IocContainer.Setup();
+
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
         }

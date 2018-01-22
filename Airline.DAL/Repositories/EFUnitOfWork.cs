@@ -1,4 +1,5 @@
-﻿using Airline.DAL.EF;
+﻿using System;
+using Airline.DAL.EF;
 using Airline.DAL.Entities;
 using Airline.DAL.Interfaces;
 
@@ -8,21 +9,38 @@ namespace Airline.DAL.Repositories
     {
         private AirlineContext db;
 
+        private WorkerRepository workerRepository;
+
+
         public EFUnitOfWork(string connectionString)
         {
             db = new AirlineContext(connectionString);
         }
-        public void Dispose()
-        {
-            throw new System.NotImplementedException();
-        }
-
         
-
-        public IGenericRepository<Worker> Workers { get; }
+        
         public void Save()
         {
-            throw new System.NotImplementedException();
+            db.SaveChanges();
+        }
+
+        private bool disposed = false;
+
+        public virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    db.Dispose();
+                }
+                this.disposed = true;
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }
