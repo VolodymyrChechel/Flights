@@ -8,8 +8,8 @@ namespace Airline.BLL.Interfaces
     {
         IEnumerable<WorkerDto> GetWorkers();
         WorkerDto GetWorker(object key);
-        void CreateWorker(WorkerDto);
-        void EditWorker(WorkerDto);
+        void CreateWorker(WorkerDto workerDto);
+        void EditWorker(WorkerDto workerDto);
 
     }
 }

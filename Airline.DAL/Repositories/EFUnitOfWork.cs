@@ -16,8 +16,10 @@ namespace Airline.DAL.Repositories
         {
             db = new AirlineContext(connectionString);
         }
-        
-        
+
+
+        public IGenericRepository<Worker> Workers { get; }
+
         public void Save()
         {
             db.SaveChanges();

@@ -11,6 +11,9 @@ namespace Airline.WEB
     {
         protected void Application_Start()
         {
+
+            AutoMapperConfig.Initialize();
+
             IocContainer.Setup();
 
             AreaRegistration.RegisterAllAreas();
