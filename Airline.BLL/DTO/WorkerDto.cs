@@ -7,8 +7,8 @@ namespace Airline.BLL.DTO
     public class WorkerDto
     {
         public int Id { get; set; }
-        public string FirstName { get; set; }
-        public string Surrname { get; set; }
+        public string Name { get; set; }
+        public string Surname { get; set; }
         public DateTime? BirthDate { get; set; }
         public string PhoneNumber { get; set; }
         public CrewmanType CrewmanType { get; set; }

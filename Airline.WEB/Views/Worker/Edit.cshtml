@@ -1,0 +1,26 @@
+﻿@model WorkerViewModel
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.LabelFor(w => w.Name)
+    @Html.EditorFor(w => w.Name)
+
+    @Html.LabelFor(w => w.Surname)
+    @Html.EditorFor(w => w.Surname)
+
+    @Html.LabelFor(w => w.BirthDate)
+    @Html.EditorFor(w => w.BirthDate)
+
+    @Html.LabelFor(w => w.PhoneNumber)
+    @Html.EditorFor(w => w.PhoneNumber)
+
+    @Html.LabelFor(w => w.CrewmanType)
+    @Html.EditorFor(w => w.CrewmanType)
+
+    <input type="submit" value="Save changes"/>
+}

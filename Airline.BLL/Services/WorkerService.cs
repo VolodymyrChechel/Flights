@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Airline.BLL.DTO;
+using Airline.BLL.Infrastructure;
 using Airline.BLL.Interfaces;
 using Airline.BLL.Util;
 using Airline.DAL.Entities;
@@ -15,10 +17,10 @@ namespace Airline.BLL.Services
         public WorkerService(IUnitOfWork uow)
         {
             Database = uow;
-            Mapper.Initialize(cfg =>
-            {
-                cfg.AddProfile(new BllMappingProfile());
-            });
+            //Mapper.Initialize(cfg =>
+            //{
+            //    cfg.AddProfile(new BllMappingProfile());
+            //});
         }
 
         public IEnumerable<WorkerDto> GetWorkers()
@@ -30,17 +32,39 @@ namespace Airline.BLL.Services
 
         public WorkerDto GetWorker(object key)
         {
-            throw new System.NotImplementedException();
+            if (key == null)
+                throw new ArgumentException("Worker's id was not set");
+
+            var worker = Database.Workers.Get(key);
+
+            if (worker == null)
+                throw new ArgumentException($"Worker with key={key} was not found");
+
+            var workerDto = Mapper.Map<Worker, WorkerDto>(worker);
+
+            return workerDto;
         }
 
-        public void CreateWorker(WorkerDto missing_name)
+        public void CreateWorker(WorkerDto workerDto)
         {
-            throw new System.NotImplementedException();
+            if(workerDto == null)
+                throw new ArgumentException("Worker's object was not passed");
+
+            var worker = Mapper.Map<WorkerDto, Worker>(workerDto);
+
+            Database.Workers.Create(worker);
+            Database.Save();
         }
 
-        public void EditWorker(WorkerDto missing_name)
+        public void EditWorker(WorkerDto workerDto)
         {
-            throw new System.NotImplementedException();
+            if (workerDto == null)
+                throw new ArgumentException("Worker's object was not passed");
+
+            var worker = Mapper.Map<WorkerDto, Worker>(workerDto);
+
+            Database.Workers.Update(worker);
+            Database.Save();
         }
     }
 }

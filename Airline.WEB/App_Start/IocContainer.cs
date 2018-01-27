@@ -14,7 +14,7 @@ namespace Airline.WEB
         {
             _container = new WindsorContainer().Install(FromAssembly.This());
             var bllInstaller = new BllWindsorInstaller("AirlineContext");
-            _container.Install(bllInstaller);
+            _container.Install(bllInstaller);       
 
             CastleControllerFactory controllerFactory = new CastleControllerFactory(_container);
             ControllerBuilder.Current.SetControllerFactory(controllerFactory);

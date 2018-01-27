@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using Airline.Common.Enums;
 
-namespace Airline.DAL.Entities
+namespace Airline.WEB.Models
 {
-    // Class represents entity for all workers
-    public class Worker
+    public class WorkerViewModel
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -14,6 +12,6 @@ namespace Airline.DAL.Entities
         public string PhoneNumber { get; set; }
         public CrewmanType CrewmanType { get; set; }
 
-        public ICollection<Crew> Crews { get; set; }
+        //public ICollection<Crew> Crews { get; set; }
     }
 }

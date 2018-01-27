@@ -1,0 +1,89 @@
+﻿@model WorkerViewModel
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+
+@if(!Html.ViewData.ModelState.IsValid)
+{
+    <p class="alert alert-warning">
+        @Html.ValidationSummary()
+    </p>
+}
+
+@using (Html.BeginForm("Create", "Worker", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken()
+
+    @*<div class="form-group">
+        @Html.LabelFor(model => model.ClassId, new { @class = "control-label col-sm-2" })
+
+        <div class="col-sm-10">
+            @Html.DropDownListFor(model => model.ClassId, (IEnumerable<SelectListItem>)ViewBag.ClassListItems, new {@class="form-control col-sm-6"})
+        </div>
+    </div>*@
+
+    @*<div class="form-group">
+        @Html.LabelFor(model => model.SubjectId, new { @class = "control-label col-sm-2" })
+
+        <div class="col-sm-10">
+            @Html.DropDownListFor(model => model.SubjectId, (IEnumerable<SelectListItem>)ViewBag.SubjectListItems, new {@class="form-control col-sm-6"})
+        </div>
+    </div>*@
+
+    @*<div class="form-group">
+        @Html.LabelFor(model => model.SemesterId, new { @class = "control-label col-sm-2" })
+
+        <div class="col-sm-10">
+            @Html.DropDownListFor(model => model.SemesterId, (IEnumerable<SelectListItem>)ViewBag.SemesterListItems, new {@class="form-control col-sm-6"})
+        </div>
+    </div>*@
+
+    <div class="form-group">
+        @Html.LabelFor(w => w.Name, new { @class = "control-label col-sm-2" })
+
+        <div class="col-sm-10">
+            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control col-sm-6" }})
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(w => w.Surname, new { @class = "control-label col-sm-2" })
+
+        <div class="col-sm-10">
+            @Html.EditorFor(model => model.Surname, new { htmlAttributes = new { @class = "form-control col-sm-6" }})
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(w => w.BirthDate, new { @class = "control-label col-sm-2" })
+
+        <div class="col-sm-10">
+            @Html.EditorFor(model => model.BirthDate, new { htmlAttributes = new { @class = "form-control col-sm-6" }})
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(w => w.PhoneNumber, new { @class = "control-label col-sm-2" })
+
+        <div class="col-sm-10">
+            @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control col-sm-6" }})
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(w => w.CrewmanType, new { @class = "control-label col-sm-2" })
+
+        <div class="col-sm-10">
+            @Html.EnumDropDownListFor(model => model.CrewmanType, new { htmlAttributes = new { @class = "form-control col-sm-6" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <input type="submit" class="btn btn-success" value="Create new worker">
+        </div>
+    </div>
+}

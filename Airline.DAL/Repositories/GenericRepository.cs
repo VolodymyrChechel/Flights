@@ -12,7 +12,7 @@ namespace Airline.DAL.Repositories
 
         protected GenericRepository(C context)
         {
-            context = db;
+            db = context;
         }
 
         public virtual void Create(T item)

@@ -17,15 +17,15 @@ namespace Airline.BllTests
     public class WorkerServiceTest
     {
         private static readonly List<Worker> workers = new List<Worker> { 
-            new Worker() { FirstName = "Oleksii", Surrname = "Bondarenko", BirthDate = DateTime.Parse("1974-3-5"), PhoneNumber = "+380634709089", CrewmanType = CrewmanType.AircraftPilot},
-            new Worker() { FirstName = "Yevhen", Surrname = "Momot", BirthDate = DateTime.Parse("1969-5-28"), PhoneNumber = "+380994249474", CrewmanType = CrewmanType.AircraftPilot},
-            new Worker() { FirstName = "Yakiv", Surrname = "Oliynyk", BirthDate = DateTime.Parse("1961-4-29"), PhoneNumber = "+380509131890", CrewmanType = CrewmanType.AircraftPilot}
+            new Worker() { Name = "Oleksii", Surname = "Bondarenko", BirthDate = DateTime.Parse("1974-3-5"), PhoneNumber = "+380634709089", CrewmanType = CrewmanType.AircraftPilot},
+            new Worker() { Name = "Yevhen", Surname = "Momot", BirthDate = DateTime.Parse("1969-5-28"), PhoneNumber = "+380994249474", CrewmanType = CrewmanType.AircraftPilot},
+            new Worker() { Name = "Yakiv", Surname = "Oliynyk", BirthDate = DateTime.Parse("1961-4-29"), PhoneNumber = "+380509131890", CrewmanType = CrewmanType.AircraftPilot}
             };
 
         private static readonly IEnumerable<WorkerDto> workerDtos = new List<WorkerDto> {
-            new WorkerDto() { FirstName = "Oleksii", Surrname = "Bondarenko", BirthDate = DateTime.Parse("1974-3-5"), PhoneNumber = "+380634709089", CrewmanType = CrewmanType.AircraftPilot},
-            new WorkerDto() { FirstName = "Yevhen", Surrname = "Momot", BirthDate = DateTime.Parse("1969-5-28"), PhoneNumber = "+380994249474", CrewmanType = CrewmanType.AircraftPilot},
-            new WorkerDto() { FirstName = "Yakiv", Surrname = "Oliynyk", BirthDate = DateTime.Parse("1961-4-29"), PhoneNumber = "+380509131890", CrewmanType = CrewmanType.AircraftPilot}
+            new WorkerDto() { Name = "Oleksii", Surname = "Bondarenko", BirthDate = DateTime.Parse("1974-3-5"), PhoneNumber = "+380634709089", CrewmanType = CrewmanType.AircraftPilot},
+            new WorkerDto() { Name = "Yevhen", Surname = "Momot", BirthDate = DateTime.Parse("1969-5-28"), PhoneNumber = "+380994249474", CrewmanType = CrewmanType.AircraftPilot},
+            new WorkerDto() { Name = "Yakiv", Surname = "Oliynyk", BirthDate = DateTime.Parse("1961-4-29"), PhoneNumber = "+380509131890", CrewmanType = CrewmanType.AircraftPilot}
         };
 
         private IWorkerService service;
