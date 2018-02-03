@@ -15,6 +15,7 @@ namespace Airline.WEB.Util
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
             container.Register(Component.For<IWorkerService>().ImplementedBy<WorkerService>());
+            container.Register(Component.For<IFlightService>().ImplementedBy<FlightService>());
 
             var controllers = Assembly.GetExecutingAssembly().GetTypes().
                 Where(x => x.BaseType == typeof(Controller)).ToList();

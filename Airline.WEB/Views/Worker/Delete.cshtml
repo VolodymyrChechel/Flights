@@ -1,0 +1,30 @@
+﻿@model WorkerViewModel
+@{
+    ViewBag.Title = "Delete worker";
+}
+
+<div class="row">
+    <div class="header col-12">
+        <h3 class="float-left">@Html.ActionLink("List of workers", "List") /
+            @Html.ActionLink($"Edit {@Model.Name} {@Model.Surname}", "Edit", new {id = @Model.Id}) / @ViewBag.Title </h3>
+    </div>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        <div class=""> @Model.Name @Model.Surname @Model.BirthDate.ToShortDateString()</div>
+        <div> @Model.PhoneNumber </div>
+        <div> @Model.CrewmanType </div>
+    </div>
+
+    <div class="form-group">
+        <div>Do you really want to delete this worker?</div>
+        <div>
+            <input type="submit" value="Delete" class="btn btn-danger" /> |
+            @Html.ActionLink("Back to list", "List")
+        </div>
+    </div>
+}

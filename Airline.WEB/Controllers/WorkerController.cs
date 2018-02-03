@@ -34,7 +34,8 @@ namespace Airline.WEB.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            return View();
+            var model = new WorkerViewModel() {BirthDate = DateTime.Parse("1/1/1980")};
+            return View(model);
         }
 
         [HttpPost]
@@ -51,7 +52,7 @@ namespace Airline.WEB.Controllers
 
                 return RedirectToAction("List");
             }
-            return View();
+            return View(worker);
         }
 
         [HttpGet]
@@ -86,6 +87,41 @@ namespace Airline.WEB.Controllers
                 return RedirectToAction("List");
             }
             return View(worker);
+        }
+
+        [HttpGet]
+        public ActionResult Delete(int? id)
+        {
+            try
+            {
+                var workerDro = _service.GetWorker(id);
+                var worker = Mapper.Map<WorkerDto, WorkerViewModel>(workerDro);
+
+                return View(worker);
+            }
+            catch (ArgumentException e)
+            {
+                TempData["Message"] = e.Message;
+                return RedirectToAction("List");
+            }
+        }
+
+        [HttpPost]
+        [ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            try
+            {
+                _service.DeleteWorker(id);
+                TempData["Message"] = $"Worker {id} was deleted";
+            }
+            catch (ArgumentException e)
+            {
+                TempData["Message"] = e.Message;
+            }
+
+            return RedirectToAction("List");
         }
     }
 }

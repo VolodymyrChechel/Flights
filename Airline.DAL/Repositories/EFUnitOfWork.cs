@@ -10,13 +10,13 @@ namespace Airline.DAL.Repositories
         private AirlineContext db;
 
         private WorkerRepository workerRepository;
+        private FlightRepository flightRepository;
 
         public EFUnitOfWork(string connectionString)
         {
             db = new AirlineContext(connectionString);
         }
-
-
+        
         public IGenericRepository<Worker> Workers
         {
             get

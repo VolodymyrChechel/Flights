@@ -10,6 +10,7 @@ namespace Airline.BLL.Interfaces
         WorkerDto GetWorker(object key);
         void CreateWorker(WorkerDto workerDto);
         void EditWorker(WorkerDto workerDto);
+        void DeleteWorker(object key);
 
     }
 }

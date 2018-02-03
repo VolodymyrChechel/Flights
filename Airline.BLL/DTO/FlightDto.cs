@@ -1,16 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Security.Cryptography;
+using Airline.DAL.Entities;
 
-namespace Airline.DAL.Entities
+namespace Airline.BLL.DTO
 {
     /// <summary>
     /// Represents fligh table with destination, departure city, time and regularity
     /// </summary>
-    public class Flight
+    public class FlightDto
     {
-        [Key]
         public string Id { get; set; }
         public TimeSpan PlannedDepartureTime { get; set; }
         public TimeSpan PlannedFlightTime { get; set; }

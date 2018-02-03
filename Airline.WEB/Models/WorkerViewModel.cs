@@ -22,13 +22,13 @@ namespace Airline.WEB.Models
 
         [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:d}")]
-        //[Range(typeof(DateTime), "01/01/1950", "01/01/1999")]
         [DateRange("01/01/1950", "01/01/1999")]
-        public DateTime? BirthDate { get; set; }
+        public DateTime BirthDate { get; set; }
 
         [Required(ErrorMessage = "Input worker's phone number")]
         [DataType(DataType.PhoneNumber)]
-        [RegularExpression(ValidationRegex.Phone)]
+        [RegularExpression(ValidationRegex.Phone,
+            ErrorMessage = "Phone not match the formatting: +380XXXXXXXXXX")]
         public string PhoneNumber { get; set; }
 
         [Required]

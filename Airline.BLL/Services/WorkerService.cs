@@ -66,5 +66,14 @@ namespace Airline.BLL.Services
             Database.Workers.Update(worker);
             Database.Save();
         }
+
+        public void DeleteWorker(object key)
+        {
+            if (key == null)
+                throw new ArgumentException("Worker's id was not set");
+
+            Database.Workers.Delete(key);
+            Database.Save();
+        }
     }
 }

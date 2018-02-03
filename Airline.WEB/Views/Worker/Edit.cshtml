@@ -8,15 +8,15 @@
 <div class="row">
     <div class="header col-12">
         <h3 class="float-left">@Html.ActionLink("List of workers", "List") / @ViewBag.Title</h3>
+        <a href="@Url.Action("Delete", routeValues: new {id = @Model.Id})" class="btn btn-danger float-right"> Delete this worker </a>
     </div>
 </div>
 
-@using (Html.BeginForm(@*"Edit", "Worker", FormMethod.Post, new {@class="form-horizontal"}*@))
+@using (Html.BeginForm())
 {
     @Html.ValidationSummary(false, "", new { @class = "text-danger" })
     @Html.AntiForgeryToken()
     @Html.HiddenFor(w => w.Id)
-
 
     <div class="form-group row">
         @Html.LabelFor(w => w.Name, new { @class = "col-sm-2 col-form-label" })
@@ -30,16 +30,7 @@
             @Html.EditorFor(w => w.Surname, new { htmlAttributes = new { @class = "form-control" } })
         </div>
     </div>
-
-
-    @*<div class='input-group date' id='datetimepicker2'>
-            <input type='text' class="form-control" />
-            <span class="input-group-addon">
-                <span class="glyphicon glyphicon-calendar"></span>
-            </span>
-        </div>*@
-
-
+    
     <div class="form-group row">
         @Html.LabelFor(w => w.BirthDate, new { @class = "col-form-label col-sm-2" })
         <div class="col-sm-10">
@@ -47,7 +38,7 @@
        {
            id = "datepicker",
            @class = "form-control datepicker",
-           @Value = Model.BirthDate.Value.ToShortDateString()
+           @Value = Model.BirthDate.ToShortDateString()
        })
         </div>
     </div>
@@ -72,7 +63,6 @@
 }
 
 @section Scripts{
-    <script src="~/Scripts/b"></script>
     <script src="~/Scripts/bootstrap-datepicker.min.js"></script>
 
     <script>
@@ -80,19 +70,13 @@
             $('#datepicker').datepicker();
 
             console.log("datepicker appeared");
-
-            //(function ($) {
-
-            //}(jQuery));
-
         });
-
 
     (function ($) {
         $.validator.addMethod('rangeDate',
             function (value, element, param) {
                 if (!value) {
-                    return true; // not testing 'is required' here!
+                    return true;
                 }
                 try {
                     var dateValue = new Date(value);

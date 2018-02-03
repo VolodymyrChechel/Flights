@@ -5,8 +5,8 @@
 
 <div class="row">
     <div class=" header col-12">
-        <h3 class="float-sm-left">@ViewBag.Title</h3>
-        <a href="@Url.Action("Create")" class="btn btn-primary float-sm-right">Create new worker</a>
+        <h3 class="float-left">@ViewBag.Title</h3>
+        <a href="@Url.Action("Create")" class="btn btn-primary float-right">Create new worker</a>
     </div>
 </div>
 
@@ -29,7 +29,7 @@
             <td>@item.Id</td>
             <td>@item.Name</td>
             <td>@item.Surname</td>
-            <td>@item.BirthDate.Value.ToShortDateString()</td>
+            <td>@item.BirthDate.ToShortDateString()</td>
             <td>@item.PhoneNumber</td>
             <td>@item.CrewmanType</td>
         </tr>
