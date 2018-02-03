@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using Airline.DAL.Interfaces;
 
@@ -44,7 +45,7 @@ namespace Airline.DAL.Repositories
 
         public virtual void Update(T item)
         {
-            db.Entry(item).State = EntityState.Modified;
+            db.Set<T>().AddOrUpdate(item);
         }
     }
 }

@@ -7,7 +7,7 @@ using Airline.DAL.Entities;
 
 namespace Airline.DAL.EF
 {
-    public class AirlineDbInitializer : DropCreateDatabaseAlways<AirlineContext>
+    public class AirlineDbInitializer : DropCreateDatabaseIfModelChanges<AirlineContext>
     {
         protected override void Seed(AirlineContext db)
         {

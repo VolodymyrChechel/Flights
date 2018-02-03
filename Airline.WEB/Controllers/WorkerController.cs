@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using Airline.BLL.DTO;
 using Airline.BLL.Infrastructure;
 using Airline.BLL.Interfaces;
+using Airline.WEB.Filters;
 using Airline.WEB.Models;
 using AutoMapper;
 
@@ -21,6 +22,7 @@ namespace Airline.WEB.Controllers
             _service = service;
         }
 
+        [MessageFromTempData]
         public ActionResult List()
         {
             var workerDtos = _service.GetWorkers();
@@ -53,7 +55,7 @@ namespace Airline.WEB.Controllers
         }
 
         [HttpGet]
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
             try
             {
@@ -62,32 +64,28 @@ namespace Airline.WEB.Controllers
 
                 return View(worker);
             }
-            catch (ValidationException e)
+            catch (ArgumentException e)
             {
-                
+                TempData["Message"] = e.Message;
+                return RedirectToAction("List");
             }
-            return null;
-
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Edit(WorkerViewModel worker)
         {
-            //try
-            //{
-            //    var workerDro = _service.GetWorker(id);
-            //    var worker = Mapper.Map<WorkerDto, WorkerViewModel>(workerDro);
+            if (ModelState.IsValid)
+            {
+                var workerDto = Mapper.Map<WorkerViewModel, WorkerDto>(worker);
 
-            //    return View(worker);
-            //}
-            //catch (ValidationException e)
-            //{
+                _service.EditWorker(workerDto);
 
-            //}
-            return null;
+                TempData["Message"] = $"Worker {workerDto.Name} {workerDto.Surname} was edited succesfully";
 
+                return RedirectToAction("List");
+            }
+            return View(worker);
         }
-
-
     }
 }

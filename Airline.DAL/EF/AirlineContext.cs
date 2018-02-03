@@ -12,7 +12,7 @@ namespace Airline.DAL.EF
 
         public AirlineContext(string connectionString) : base(connectionString)
         {
-            
+            //Configuration.AutoDetectChangesEnabled = false;
         }
 
         public IDbSet<Airport> Airports { get; set; } // initialized
