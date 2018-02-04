@@ -4,9 +4,9 @@ using Airline.DAL.Interfaces;
 
 namespace Airline.DAL.Repositories
 {
-    public class FlightRepository : GenericRepository<AirlineContext, Flight>
+    public class AirportRepository : GenericRepository<AirlineContext, Airport>
     {
-        public FlightRepository(AirlineContext context) : base(context)
+        public AirportRepository(AirlineContext context) : base(context)
         {
             
         }

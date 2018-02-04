@@ -9,7 +9,7 @@ namespace Airline.BLL.DTO
     public class FlightDto
     {
         public string Id { get; set; }
-        public TimeSpan PlannedDepartureTime { get; set; }
+        public DateTime PlannedDepartureTime { get; set; }
         public TimeSpan PlannedFlightTime { get; set; }
 
         public string FromIATA { get; set; }

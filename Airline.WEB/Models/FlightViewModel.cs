@@ -10,10 +10,10 @@ namespace Airline.WEB.Models
     {
         public String Id { get; set; }
 
-        public string FromName { get; set; }
-        public string ToName { get; set; }
+        public string FromIATA { get; set; }
+        public string ToIATA { get; set; }
         [Required]
-        public TimeSpan PlannedDepartureTime { get; set; }
+        public DateTime PlannedDepartureTime { get; set; }
         [Required]
         public TimeSpan PlannedFlightTime { get; set; }
     }

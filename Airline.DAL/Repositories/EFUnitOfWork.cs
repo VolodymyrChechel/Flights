@@ -11,6 +11,7 @@ namespace Airline.DAL.Repositories
 
         private WorkerRepository workerRepository;
         private FlightRepository flightRepository;
+        private AirportRepository airportRepository;
 
         public EFUnitOfWork(string connectionString)
         {
@@ -25,6 +26,28 @@ namespace Airline.DAL.Repositories
                     workerRepository = new WorkerRepository(db);
 
                 return workerRepository;
+            }
+        }
+
+        public IGenericRepository<Flight> Flights
+        {
+            get
+            {
+                if (flightRepository == null)
+                    flightRepository = new FlightRepository(db);
+
+                return flightRepository;
+            }
+        }
+
+        public IGenericRepository<Airport> Airports
+        {
+            get
+            {
+                if (airportRepository == null)
+                    airportRepository = new AirportRepository(db);
+
+                return airportRepository;
             }
         }
 

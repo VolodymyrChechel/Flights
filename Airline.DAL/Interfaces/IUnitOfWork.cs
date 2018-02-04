@@ -7,6 +7,7 @@ namespace Airline.DAL.Interfaces
     {
         IGenericRepository<Worker> Workers { get; }
         IGenericRepository<Flight> Flights { get; }
+        IGenericRepository<Airport> Airports { get; }
 
         void Save();
     }
