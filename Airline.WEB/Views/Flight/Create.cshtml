@@ -1,6 +1,6 @@
 ﻿@model FlightViewModel
 @{
-    ViewBag.Title = "Create worker";
+    ViewBag.Title = "Create flight";
 }
 
 <link href="~/Content/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
@@ -21,13 +21,14 @@
     <div class="form-group row">
         @Html.LabelFor(f => f.FromIATA, new { @class = "col-sm-2 col-form-label" })
         <div class="col-sm-10">
-            @Html.EditorFor(f => f.FromIATA, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.DropDownListFor(f => f.FromIATA, (IEnumerable<SelectListItem>)ViewBag.AirportSelectList, new { @class = "form-control"})
         </div>
     </div>
+
     <div class="form-group row">
         @Html.LabelFor(f => f.ToIATA, new { @class = "col-form-label col-sm-2" })
         <div class="col-sm-10">
-            @Html.EditorFor(f => f.ToIATA, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.DropDownListFor(f => f.FromIATA, (IEnumerable<SelectListItem>)ViewBag.AirportSelectList, new { @class = "form-control" })
         </div>
     </div>
 
@@ -44,6 +45,18 @@
     </div>
 
     <div class="form-group row">
+        @Html.LabelFor(f => f.PlannedFlightTime, new { @class = "col-form-label col-sm-2" })
+        <div class="col-sm-10">
+            @Html.TextBoxFor(w => w.PlannedFlightTime, new
+            {
+                id = "timepicker",
+                @class = "form-control datepicker",
+                @Value = Model.PlannedDepartureTime.ToShortDateString()
+            })
+        </div>
+    </div>
+
+    <div class="form-group row">
         <div class="col-sm-2 offset-md-2">
             <input type="submit" class="btn btn-success" value="Save changes">
         </div>
@@ -56,8 +69,8 @@
     <script>
         $(function () {
             $('#datepicker').datepicker();
+            $('timepicker').timepicker();
 
-            console.log("datepicker appeared");
         });
 
     (function ($) {

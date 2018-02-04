@@ -11,7 +11,8 @@ namespace Airline.WEB.Util
             CreateMap<WorkerDto, WorkerViewModel>();
             CreateMap<WorkerDto, WorkerViewModel>().ReverseMap();
 
-
+            CreateMap<FlightDto, FlightViewModel>();
+            CreateMap<FlightDto, FlightViewModel>().ReverseMap();
         }
     }
 }

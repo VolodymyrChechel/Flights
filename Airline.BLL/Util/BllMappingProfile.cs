@@ -13,6 +13,9 @@ namespace Airline.BLL.Util
 
             CreateMap<Flight, FlightDto>();
             CreateMap<Flight, FlightDto>().ReverseMap();
+
+            CreateMap<Airport, AirportDto>();
+            CreateMap<Airport, AirportDto>().ReverseMap();
         }
     }
 }
