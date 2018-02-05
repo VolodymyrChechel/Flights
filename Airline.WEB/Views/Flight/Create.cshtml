@@ -36,12 +36,11 @@
             @Html.TextBoxFor(w => w.PlannedDepartureTime, new
             {
                 id = "datetimepicker",
-                @class = "form-control datepicker",
+                @class = "form-control",
                 @Value = Model.PlannedDepartureTime.ToShortDateString()
             })
         </div>
     </div>
-    //add moment js
 
     <div class="form-group row">
         @Html.LabelFor(f => f.PlannedFlightTime, new { @class = "col-form-label col-sm-2" })
@@ -49,7 +48,7 @@
             @Html.TextBoxFor(w => w.PlannedFlightTime, new
             {
                 id = "timepicker",
-                @class = "form-control datepicker",
+                @class = "form-control datetimepicker-input",
                 @Value = Model.PlannedDepartureTime.ToShortDateString()
             })
         </div>
@@ -63,13 +62,13 @@
 }
 
 @section Styles{
-    <link href="~/Content/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
-    <link href="~/Content/bootstrap-datetimepicker-build.min.css" rel="stylesheet" type="text/css" />
+    @*<link href="~/Content/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />*@
+    @*<link href="~/Content/bootstrap-datetimepicker.css" rel="stylesheet" type="text/css" />*@
 }
 
 @section Scripts{
-    <script src="~/Scripts/moment.min.js"></script>
-    <script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
+    @*<script src="~/Scripts/moment.min.js"></script>*@
+    @*<script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>*@
 
     <script>
         $(function () {
