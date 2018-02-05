@@ -34,23 +34,19 @@
         @Html.LabelFor(f => f.PlannedDepartureTime, new { @class = "col-form-label col-sm-2" })
         <div class="col-sm-10">
             @Html.TextBoxFor(w => w.PlannedDepartureTime, new
-            {
-                id = "datetimepicker",
-                @class = "form-control",
-                @Value = Model.PlannedDepartureTime.ToShortDateString()
-            })
+       {
+           id = "datetimepicker",
+           @class = "form-control",
+           data_toggle = "datetimepicker",
+           data_target = "#datetimepicker"
+       })
         </div>
     </div>
 
     <div class="form-group row">
         @Html.LabelFor(f => f.PlannedFlightTime, new { @class = "col-form-label col-sm-2" })
         <div class="col-sm-10">
-            @Html.TextBoxFor(w => w.PlannedFlightTime, new
-            {
-                id = "timepicker",
-                @class = "form-control datetimepicker-input",
-                @Value = Model.PlannedDepartureTime.ToShortDateString()
-            })
+            @Html.TextBoxFor(w => w.PlannedFlightTime, new { @class = "form-control" })
         </div>
     </div>
 
@@ -63,17 +59,19 @@
 
 @section Styles{
     @*<link href="~/Content/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />*@
-    @*<link href="~/Content/bootstrap-datetimepicker.css" rel="stylesheet" type="text/css" />*@
+    <link href="~/Content/bootstrap-datetimepicker.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" type="text/css" />@*
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css" />*@
 }
 
 @section Scripts{
-    @*<script src="~/Scripts/moment.min.js"></script>*@
-    @*<script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>*@
+    <script src="~/Scripts/moment.min.js"></script>@*
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>*@
+    <script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
 
     <script>
         $(function () {
             $('#datetimepicker').datetimepicker();
-
         });
 
     (function ($) {
@@ -106,7 +104,17 @@
                     options.messages['rangeDate'] = options.message;
                 }
             });
-    }(jQuery));
+        }(jQuery));
+
+        $(document).mouseup(function(e) 
+        {
+            var container = $(".bootstrap-datetimepicker-widget");
+
+            // if the target of the click isn't the container nor a descendant of the container
+            if (!container.is(e.target) && container.has(e.target).length === 0) {
+                $('#datetimepicker').datetimepicker("hide");
+            }
+        });
 
     </script>
 }
