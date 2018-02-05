@@ -51,5 +51,11 @@ namespace Airline.WEB.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        public ActionResult Create(FlightViewModel model)
+        {
+
+            return View(model);
+        }
     }
 }

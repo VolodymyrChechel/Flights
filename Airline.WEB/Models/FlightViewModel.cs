@@ -15,6 +15,7 @@ namespace Airline.WEB.Models
         [Required]
         public DateTime PlannedDepartureTime { get; set; }
         [Required]
+        [RegularExpression(ValidationRegex.Time, ErrorMessage = "Duration has no appropriate format XX:XX")]
         public TimeSpan PlannedFlightTime { get; set; }
     }
 }
