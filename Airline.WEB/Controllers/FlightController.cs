@@ -7,6 +7,7 @@ using Airline.BLL.DTO;
 using Airline.BLL.Interfaces;
 using Airline.WEB.Filters;
 using Airline.WEB.Models;
+using Airline.WEB.Util;
 using AutoMapper;
 
 namespace Airline.WEB.Controllers
@@ -35,27 +36,29 @@ namespace Airline.WEB.Controllers
         public ActionResult Create()
         {
             var airports = _airportService.GetAirports();
-            var selectListItems = new List<SelectListItem>();
 
-            foreach (var airport in airports)
-            {
-                selectListItems.Add(new SelectListItem{Text = airport.Name, Value = airport.IATA});
-            }
+            ViewBag.AirportSelectList = UtilMethods.CreateListOfSelectItems(airports, airport => airport.IATA, airport => airport.Name);
 
-            ViewBag.AirportSelectList = selectListItems;
-
-            var model = new FlightViewModel
-            {
-                PlannedDepartureTime = DateTime.UtcNow
-            };
-            return View(model);
+            return View(new FlightViewModel {PlannedDepartureTime = DateTime.UtcNow});
         }
 
         [HttpPost]
-        public ActionResult Create(FlightViewModel model)
+        public ActionResult Create(FlightViewModel flight)
         {
+            if (ModelState.IsValid)
+                {
+                    var flightDto = Mapper.Map<FlightViewModel, FlightDto>(flight);
 
-            return View(model);
+                    _service.CreateFlight(flightDto);
+
+                    TempData["Message"] = $"New flight from {flight.FromIATA} to {flight.ToIATA} at {flight.PlannedDepartureTime} was created succesfully";
+                    return RedirectToAction("List");
+                }
+
+            var airports = _airportService.GetAirports();
+
+            ViewBag.AirportSelectList = UtilMethods.CreateListOfSelectItems(airports, airport => airport.IATA, airport => airport.Name);
+            return View(flight);
         }
     }
 }

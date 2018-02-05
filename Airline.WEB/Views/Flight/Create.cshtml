@@ -13,8 +13,13 @@
 {
     @Html.ValidationSummary(false, "", new { @class = "text-danger" })
     @Html.AntiForgeryToken()
-    @Html.HiddenFor(w => w.Id)
 
+    <div class="form-group row">
+        @Html.LabelFor(f => f.Id, new { @class = "col-form-label col-sm-2" })
+        <div class="col-sm-10">
+            @Html.EditorFor(w => w.Id, new { htmlAttributes = new { @class = "form-control" }} )
+        </div>
+    </div>
 
     <div class="form-group row">
         @Html.LabelFor(f => f.FromIATA, new { @class = "col-sm-2 col-form-label" })
@@ -26,7 +31,7 @@
     <div class="form-group row">
         @Html.LabelFor(f => f.ToIATA, new { @class = "col-form-label col-sm-2" })
         <div class="col-sm-10">
-            @Html.DropDownListFor(f => f.FromIATA, (IEnumerable<SelectListItem>)ViewBag.AirportSelectList, new { @class = "form-control" })
+            @Html.DropDownListFor(f => f.ToIATA, (IEnumerable<SelectListItem>)ViewBag.AirportSelectList, new { @class = "form-control"})
         </div>
     </div>
 
@@ -46,7 +51,7 @@
     <div class="form-group row">
         @Html.LabelFor(f => f.PlannedFlightTime, new { @class = "col-form-label col-sm-2" })
         <div class="col-sm-10">
-            @Html.TextBoxFor(w => w.PlannedFlightTime, new { @class = "form-control" })
+            @Html.TextBoxFor(w => w.PlannedFlightTime, new { @class = "form-control", @Value="1:00"})
         </div>
     </div>
 
@@ -58,15 +63,12 @@
 }
 
 @section Styles{
-    @*<link href="~/Content/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />*@
     <link href="~/Content/bootstrap-datetimepicker.css" rel="stylesheet" type="text/css" />
-    <link href="~/Content/font-awesome.min.css" rel="stylesheet" type="text/css" />@*
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css" />*@
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" type="text/css" />
 }
 
 @section Scripts{
-    <script src="~/Scripts/moment.min.js"></script>@*
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>*@
+    <script src="~/Scripts/moment.min.js"></script>
     <script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
 
     <script>
@@ -74,37 +76,22 @@
             $('#datetimepicker').datetimepicker();
         });
 
-    (function ($) {
-        $.validator.addMethod('rangeDate',
-            function (value, element, param) {
-                if (!value) {
-                    return true;
-                }
-                try {
-                    var dateValue = new Date(value);
-                }
-                catch (e) {
-                    return false;
-                }
-                var res = param.min <= dateValue && dateValue <= param.max;
-                console.log(res);
-                return res;
-            });
+        (function($) {
+            $.validator.addMethod('notEqualTo',
+                function(value, element, param) {
+                    return this.optional(element) || value != $(param).val();
+                },
+                '');
 
-        // The adapter to support ASP.NET MVC unobtrusive validation
-        $.validator.unobtrusive.adapters.add('rangedate', ['min', 'max'],
-            function (options) {
-                var params = {
-                    min: new Date(options.params.min),
-                    max: new Date(options.params.max)
-                };
-
-                options.rules['rangeDate'] = params;
-                if (options.message) {
-                    options.messages['rangeDate'] = options.message;
-                }
-            });
-        }(jQuery));
+            $.validator.unobtrusive.adapters.add('notequalto',
+                ['other'],
+                function(options) {
+                    options.rules['notEqualTo'] = '#' + options.params.other;
+                    if (options.message) {
+                        options.messages['notEqualTo'] = options.message;
+                    }
+                });
+        })(jQuery);
 
         $(document).mouseup(function(e) 
         {

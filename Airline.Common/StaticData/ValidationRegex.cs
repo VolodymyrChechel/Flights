@@ -7,6 +7,7 @@
         public const string Name = @"^[A-Z][A-Za-z- ]*$";
         public const string Phone = @"^\+380[\d]{9}$";
         public const string Time = @"^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$";
+        public const string FlightNumber = @"^[A-Z]{2}\d{2,3}$";
 
         // unused
         public const string SumNumber = @"^\d+(\.\d{1,2})?$";

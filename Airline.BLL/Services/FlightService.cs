@@ -49,7 +49,7 @@ namespace Airline.BLL.Services
         {
             if (flightDto == null)
                 throw new ArgumentException("Flight's object was not passed");
-
+            
             var flight = Mapper.Map<FlightDto, Flight>(flightDto);
 
             Database.Flights.Create(flight);
