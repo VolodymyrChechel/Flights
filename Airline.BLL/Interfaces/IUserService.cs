@@ -11,6 +11,6 @@ namespace Airline.BLL.Interfaces
     {
         Task<OperationDetails> Create(UserDto userDto);
         Task<ClaimsIdentity> Authenticate(UserDto userDto);
-        Task SetInitialData(UserDto adminDto, List<string> roles);
+        Task SetInitialData(List<UserDto> users, List<string> roles);
     }
 }

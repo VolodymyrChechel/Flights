@@ -17,6 +17,7 @@ namespace Airline.WEB.Util
             container.Register(Component.For<IWorkerService>().ImplementedBy<WorkerService>());
             container.Register(Component.For<IFlightService>().ImplementedBy<FlightService>());
             container.Register(Component.For<IAirportService>().ImplementedBy<AirportService>());
+            container.Register(Component.For<IUserService>().ImplementedBy<UserService>());
 
             var controllers = Assembly.GetExecutingAssembly().GetTypes().
                 Where(x => x.BaseType == typeof(Controller)).ToList();

@@ -20,6 +20,8 @@ namespace Airline.WEB.Util
             });
             CreateMap<FlightViewModel, FlightDto>().
                 AfterMap((s, d) => d.PlannedFlightTime = TimeSpan.Parse(s.PlannedFlightTime));
+
+            CreateMap<LoginModel, UserDto>();
         }
     }
 }

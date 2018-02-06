@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using Airline.BLL.Util;
 using Airline.WEB.Util;
 using Castle.Windsor;
@@ -18,6 +19,14 @@ namespace Airline.WEB
 
             CastleControllerFactory controllerFactory = new CastleControllerFactory(_container);
             ControllerBuilder.Current.SetControllerFactory(controllerFactory);
+        }
+
+        public static IWindsorContainer GetContainer()
+        {
+            if(_container == null)
+                throw new NullReferenceException("Container was not initialized");
+
+            return _container;
         }
     }
 }
