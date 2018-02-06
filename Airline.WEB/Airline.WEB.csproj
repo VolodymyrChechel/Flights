@@ -323,6 +323,7 @@
     <Content Include="Views\Worker\Delete.cshtml" />
     <Content Include="Views\Flight\List.cshtml" />
     <Content Include="Views\Flight\Create.cshtml" />
+    <Content Include="Views\Flight\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

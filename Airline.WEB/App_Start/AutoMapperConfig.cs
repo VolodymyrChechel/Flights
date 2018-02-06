@@ -10,6 +10,7 @@ namespace Airline.WEB
         {
             AutoMapper.Mapper.Initialize(cfg =>
             {
+                cfg.CreateMissingTypeMaps = false;
                 cfg.AddProfile(new BllMappingProfile());
                 cfg.AddProfile(new WebMappingProfile());
             });

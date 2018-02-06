@@ -10,12 +10,16 @@ namespace Airline.WEB.Util
         public WebMappingProfile()
         {
             CreateMap<WorkerDto, WorkerViewModel>();
-            CreateMap<WorkerDto, WorkerViewModel>().ReverseMap();
+            CreateMap<WorkerViewModel, WorkerDto>();
 
             CreateMap<FlightDto, FlightViewModel>().
-                BeforeMap((s, d) => d.PlannedFlightTime = s.PlannedFlightTime.ToString("hh:mm"));
-            CreateMap<FlightDto, FlightViewModel>().ReverseMap().
-                BeforeMap((s, d) => d.PlannedFlightTime = TimeSpan.Parse(s.PlannedFlightTime));
+            AfterMap((s, d) =>
+            {
+                var ft = s.PlannedFlightTime;
+                d.PlannedFlightTime = s.PlannedFlightTime.ToString(@"hh\:mm");
+            });
+            CreateMap<FlightViewModel, FlightDto>().
+                AfterMap((s, d) => d.PlannedFlightTime = TimeSpan.Parse(s.PlannedFlightTime));
         }
     }
 }

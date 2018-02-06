@@ -56,7 +56,43 @@ namespace Airline.WEB.Controllers
                 }
 
             var airports = _airportService.GetAirports();
+            ViewBag.AirportSelectList = UtilMethods.CreateListOfSelectItems(airports, airport => airport.IATA, airport => airport.Name);
+            return View(flight);
+        }
 
+        [HttpGet]
+        public ActionResult Edit(string id)
+        {
+            try
+            {
+                var flightDto = _service.GetFlight(id);
+                var worker = Mapper.Map<FlightDto, FlightViewModel>(flightDto);
+                var airports = _airportService.GetAirports();
+                ViewBag.AirportSelectList = UtilMethods.CreateListOfSelectItems(airports, airport => airport.IATA, airport => airport.Name);
+                return View(worker);
+            }
+            catch (ArgumentException e)
+            {
+                TempData["Message"] = e.Message;
+                return RedirectToAction("List");
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(FlightViewModel flight)
+        {
+            if (ModelState.IsValid)
+            {
+                var flightDto = Mapper.Map<FlightViewModel, FlightDto>(flight);
+
+                _service.EditFlight(flightDto);
+
+                TempData["Message"] = $"Flight {flight.FromIATA} to {flight.ToIATA} at {flight.PlannedDepartureTime} was edited succesfully";
+
+                return RedirectToAction("List");
+            }
+            var airports = _airportService.GetAirports();
             ViewBag.AirportSelectList = UtilMethods.CreateListOfSelectItems(airports, airport => airport.IATA, airport => airport.Name);
             return View(flight);
         }

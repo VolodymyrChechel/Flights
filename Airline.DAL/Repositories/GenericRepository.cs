@@ -45,7 +45,14 @@ namespace Airline.DAL.Repositories
 
         public virtual void Update(T item)
         {
-            db.Set<T>().AddOrUpdate(item);
+            var local = db.Set<T>().Find(item);
+            if (local != null)
+            {
+                yourDbContext.Entry(local).State = EntityState.Detached;
+            }
+            yourDbContext.Entry(applicationModel).State = EntityState.Modified;
+            db.Entry(item).State = EntityState.Modified;    
+            //db.Set<T>().AddOrUpdate(item);
         }
     }
 }
