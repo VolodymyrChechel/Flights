@@ -1,9 +1,10 @@
 ﻿using System.Data.Entity;
 using Airline.DAL.Entities;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Airline.DAL.EF
 {
-    public class AirlineContext : DbContext
+    public class AirlineContext : IdentityDbContext<IdentityUser>
     {
         static AirlineContext()
         {

@@ -3,30 +3,35 @@ using System.Data.Entity.Validation;
 using Airline.DAL.EF;
 using Airline.DAL.Entities;
 using Airline.DAL.Interfaces;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Airline.DAL.Repositories
 {
     public class EFUnitOfWork : IUnitOfWork
     {
-        private AirlineContext db;
+        private readonly AirlineContext _db;
 
-        private WorkerRepository workerRepository;
-        private FlightRepository flightRepository;
-        private AirportRepository airportRepository;
+        private WorkerRepository _workerRepository;
+        private FlightRepository _flightRepository;
+        private AirportRepository _airportRepository;
+
+        private UserManager<IdentityUser> _userManager;
+        private RoleManager<IdentityRole> _roleManager;
 
         public EFUnitOfWork(string connectionString)
         {
-            db = new AirlineContext(connectionString);
+            _db = new AirlineContext(connectionString);
         }
         
         public IGenericRepository<Worker> Workers
         {
             get
             {
-                if(workerRepository == null)
-                    workerRepository = new WorkerRepository(db);
+                if(_workerRepository == null)
+                    _workerRepository = new WorkerRepository(_db);
 
-                return workerRepository;
+                return _workerRepository;
             }
         }
 
@@ -34,10 +39,10 @@ namespace Airline.DAL.Repositories
         {
             get
             {
-                if (flightRepository == null)
-                    flightRepository = new FlightRepository(db);
+                if (_flightRepository == null)
+                    _flightRepository = new FlightRepository(_db);
 
-                return flightRepository;
+                return _flightRepository;
             }
         }
 
@@ -45,10 +50,32 @@ namespace Airline.DAL.Repositories
         {
             get
             {
-                if (airportRepository == null)
-                    airportRepository = new AirportRepository(db);
+                if (_airportRepository == null)
+                    _airportRepository = new AirportRepository(_db);
 
-                return airportRepository;
+                return _airportRepository;
+            }
+        }
+
+        public UserManager<IdentityUser> Users
+        {
+            get
+            {
+                if(_userManager == null)
+                    _userManager = new UserManager<IdentityUser>(new UserStore<IdentityUser>(_db));
+
+                return _userManager;
+            }
+        }
+
+        public RoleManager<IdentityRole> Roles
+        {
+            get
+            {
+                if (_roleManager == null)
+                    _roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(_db));
+
+                return _roleManager;
             }
         }
 
@@ -56,7 +83,7 @@ namespace Airline.DAL.Repositories
         {
             try
             {
-                db.SaveChanges();
+                _db.SaveChanges();
             }
             catch (DbEntityValidationException e)
             {
@@ -83,7 +110,7 @@ namespace Airline.DAL.Repositories
             {
                 if (disposing)
                 {
-                    db.Dispose();
+                    _db.Dispose();
                 }
                 this.disposed = true;
             }

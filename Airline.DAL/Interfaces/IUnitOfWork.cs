@@ -1,5 +1,7 @@
 ﻿using System;
 using Airline.DAL.Entities;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Airline.DAL.Interfaces
 {
@@ -8,6 +10,10 @@ namespace Airline.DAL.Interfaces
         IGenericRepository<Worker> Workers { get; }
         IGenericRepository<Flight> Flights { get; }
         IGenericRepository<Airport> Airports { get; }
+
+        UserManager<IdentityUser> Users { get; }
+        RoleManager<IdentityRole> Roles { get; }
+
 
         void Save();
     }
