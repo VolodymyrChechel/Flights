@@ -6,6 +6,7 @@
 <div class="row">
     <div class="header col-12">
         <h3 class="float-left">@Html.ActionLink("List of flights", "List") / @ViewBag.Title</h3>
+        <a href="@Url.Action("Delete", routeValues: new {id = @Model.Id})" class="btn btn-danger float-right"> Delete this flight </a>
     </div>
 </div>
 

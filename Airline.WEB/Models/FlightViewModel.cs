@@ -17,10 +17,15 @@ namespace Airline.WEB.Models
         [Required]
         [NotEqual("FromIATA", ErrorMessage = "From and To IATA must not be equal")]
         public string ToIATA { get; set; }
+
+        public string FromName { get; set; }
+        public string ToName { get; set; }
+
         [Required]
         public DateTime PlannedDepartureTime { get; set; }
         [Required]
         [RegularExpression(ValidationRegex.Time, ErrorMessage = "Duration has no appropriate format XX:XX")]
         public string PlannedFlightTime { get; set; }
+
     }
 }

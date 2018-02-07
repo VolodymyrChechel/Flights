@@ -1,0 +1,31 @@
+﻿@model FlightViewModel
+@{
+    ViewBag.Title = "Delete flight";
+}
+
+<div class="row">
+    <div class="header col-12">
+        <h3 class="float-left">
+            @Html.ActionLink("List of flights", "List") /
+        @Html.ActionLink($"Edit {@Model.FromIATA} to {@Model.ToIATA}", "Edit", new { id = @Model.Id }) / @ViewBag.Title
+    </h3>
+</div>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        <div class=""> @Model.FromIATA to @Model.ToIATA </div>
+        <div> at @Model.PlannedDepartureTime </div>
+    </div>
+
+    <div class="form-group">
+        <div>Do you really want to delete this flight?</div>
+        <div>
+            <input type="submit" value="Delete" class="btn btn-danger" /> |
+            @Html.ActionLink("Back to list", "List")
+        </div>
+    </div>
+}

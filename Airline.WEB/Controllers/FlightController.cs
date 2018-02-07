@@ -96,5 +96,41 @@ namespace Airline.WEB.Controllers
             ViewBag.AirportSelectList = UtilMethods.CreateListOfSelectItems(airports, airport => airport.IATA, airport => airport.Name);
             return View(flight);
         }
+
+
+        [HttpGet]
+        public ActionResult Delete(string id)
+        {
+            try
+            {
+                var flightDto = _service.GetFlight(id);
+                var worker = Mapper.Map<FlightDto, FlightViewModel>(flightDto);
+
+                return View(worker);
+            }
+            catch (ArgumentException e)
+            {
+                TempData["Message"] = e.Message;
+                return RedirectToAction("List");
+            }
+        }
+
+        [HttpPost]
+        [ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(string id)
+        {
+            try
+            {
+                _service.DeleteFlight(id);
+                TempData["Message"] = $"Flight {id} was deleted";
+            }
+            catch (ArgumentException e)
+            {
+                TempData["Message"] = e.Message;
+            }
+
+            return RedirectToAction("List");
+        }
     }
 }

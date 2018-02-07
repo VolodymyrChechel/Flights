@@ -94,8 +94,8 @@ namespace Airline.WEB.Controllers
         {
             try
             {
-                var workerDro = _service.GetWorker(id);
-                var worker = Mapper.Map<WorkerDto, WorkerViewModel>(workerDro);
+                var workerDto = _service.GetWorker(id);
+                var worker = Mapper.Map<WorkerDto, WorkerViewModel>(workerDto);
 
                 return View(worker);
             }

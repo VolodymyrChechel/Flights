@@ -12,10 +12,14 @@ namespace Airline.BLL.Util
             CreateMap<Worker, WorkerDto>().ReverseMap();
 
             CreateMap<Flight, FlightDto>();
-            CreateMap<Flight, FlightDto>().ReverseMap();
+            CreateMap<FlightDto, Flight>().BeforeMap((s, d) =>
+            {
+                s.FromName = null;
+                s.ToName = null;
+            });
 
             CreateMap<Airport, AirportDto>();
-            CreateMap<Airport, AirportDto>().ReverseMap();
+            CreateMap<AirportDto, Airport>();
         }
     }
 }

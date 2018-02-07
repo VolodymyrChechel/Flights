@@ -13,8 +13,10 @@ namespace Airline.BLL.DTO
         public TimeSpan PlannedFlightTime { get; set; }
 
         public string FromIATA { get; set; }
-        public Airport From { get; set; }
+        public string FromName { get; set; }
+        //public Airport From { get; set; }
         public string ToIATA { get; set; }
-        public Airport To { get; set; }
+        public string ToName { get; set; }
+        //public Airport To { get; set; }
     }
 }

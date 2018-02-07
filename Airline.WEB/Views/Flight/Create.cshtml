@@ -9,57 +9,58 @@
     </div>
 </div>
 
+
 @using (Html.BeginForm())
 {
-    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
-    @Html.AntiForgeryToken()
+     @Html.ValidationSummary(false, "", new {@class = "text-danger"})
+     @Html.AntiForgeryToken()
 
-    <div class="form-group row">
-        @Html.LabelFor(f => f.Id, new { @class = "col-form-label col-sm-2" })
-        <div class="col-sm-10">
-            @Html.EditorFor(w => w.Id, new { htmlAttributes = new { @class = "form-control" }} )
-        </div>
-    </div>
+     <div class="form-group row">
+         @Html.LabelFor(f => f.Id, new {@class = "col-form-label col-sm-2"})
+         <div class="col-sm-10">
+             @Html.EditorFor(w => w.Id, new {htmlAttributes = new {@class = "form-control"}})
+         </div>
+     </div>
 
-    <div class="form-group row">
-        @Html.LabelFor(f => f.FromIATA, new { @class = "col-sm-2 col-form-label" })
-        <div class="col-sm-10">
-            @Html.DropDownListFor(f => f.FromIATA, (IEnumerable<SelectListItem>)ViewBag.AirportSelectList, new { @class = "form-control"})
-        </div>
-    </div>
+     <div class="form-group row">
+         @Html.LabelFor(f => f.FromIATA, new {@class = "col-sm-2 col-form-label"})
+         <div class="col-sm-10">
+             @Html.DropDownListFor(f => f.FromIATA, (IEnumerable<SelectListItem>) ViewBag.AirportSelectList, new {@class = "form-control"})
+         </div>
+     </div>
 
-    <div class="form-group row">
-        @Html.LabelFor(f => f.ToIATA, new { @class = "col-form-label col-sm-2" })
-        <div class="col-sm-10">
-            @Html.DropDownListFor(f => f.ToIATA, (IEnumerable<SelectListItem>)ViewBag.AirportSelectList, new { @class = "form-control"})
-        </div>
-    </div>
+     <div class="form-group row">
+         @Html.LabelFor(f => f.ToIATA, new {@class = "col-form-label col-sm-2"})
+         <div class="col-sm-10">
+             @Html.DropDownListFor(f => f.ToIATA, (IEnumerable<SelectListItem>) ViewBag.AirportSelectList, new {@class = "form-control"})
+         </div>
+     </div>
 
-    <div class="form-group row">
-        @Html.LabelFor(f => f.PlannedDepartureTime, new { @class = "col-form-label col-sm-2" })
-        <div class="col-sm-10">
-            @Html.TextBoxFor(w => w.PlannedDepartureTime, new
-       {
-           id = "datetimepicker",
-           @class = "form-control",
-           data_toggle = "datetimepicker",
-           data_target = "#datetimepicker"
-       })
-        </div>
-    </div>
+     <div class="form-group row">
+         @Html.LabelFor(f => f.PlannedDepartureTime, new {@class = "col-form-label col-sm-2"})
+         <div class="col-sm-10">
+             @Html.TextBoxFor(w => w.PlannedDepartureTime, new
+             {
+                 id = "datetimepicker",
+                 @class = "form-control",
+                 data_toggle = "datetimepicker",
+                 data_target = "#datetimepicker"
+             })
+         </div>
+     </div>
 
-    <div class="form-group row">
-        @Html.LabelFor(f => f.PlannedFlightTime, new { @class = "col-form-label col-sm-2" })
-        <div class="col-sm-10">
-            @Html.TextBoxFor(w => w.PlannedFlightTime, new { @class = "form-control", @Value="1:00"})
-        </div>
-    </div>
+     <div class="form-group row">
+         @Html.LabelFor(f => f.PlannedFlightTime, new {@class = "col-form-label col-sm-2"})
+         <div class="col-sm-10">
+             @Html.TextBoxFor(w => w.PlannedFlightTime, new {@class = "form-control", @Value = "1:00"})
+         </div>
+     </div>
 
-    <div class="form-group row">
-        <div class="col-sm-2 offset-md-2">
-            <input type="submit" class="btn btn-success" value="Save changes">
-        </div>
-    </div>
+         <div class="form-group row">
+             <div class="col-sm-2 offset-md-2">
+                 <input type="submit" class="btn btn-success" value="Save changes">
+             </div>
+         </div>
 }
 
 @section Styles{
