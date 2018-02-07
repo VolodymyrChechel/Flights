@@ -68,8 +68,6 @@
     <script>
         $(function () {
             $('#datepicker').datepicker();
-
-            console.log("datepicker appeared");
         });
 
     (function ($) {
@@ -85,7 +83,6 @@
                     return false;
                 }
                 var res = param.min <= dateValue && dateValue <= param.max;
-                console.log(res);
                 return res;
             });
 

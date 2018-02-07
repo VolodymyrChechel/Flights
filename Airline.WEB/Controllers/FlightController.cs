@@ -66,10 +66,10 @@ namespace Airline.WEB.Controllers
             try
             {
                 var flightDto = _service.GetFlight(id);
-                var worker = Mapper.Map<FlightDto, FlightViewModel>(flightDto);
+                var flight = Mapper.Map<FlightDto, FlightViewModel>(flightDto);
                 var airports = _airportService.GetAirports();
                 ViewBag.AirportSelectList = UtilMethods.CreateListOfSelectItems(airports, airport => airport.IATA, airport => airport.Name);
-                return View(worker);
+                return View(flight);
             }
             catch (ArgumentException e)
             {

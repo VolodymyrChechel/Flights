@@ -13,13 +13,7 @@
 {
     @Html.ValidationSummary(false, "", new { @class = "text-danger" })
     @Html.AntiForgeryToken()
-
-    <div class="form-group row">
-        @Html.LabelFor(f => f.Id, new { @class = "col-form-label col-sm-2" })
-        <div class="col-sm-10">
-            @Html.EditorFor(w => w.Id, new { htmlAttributes = new { @class = "form-control" } })
-        </div>
-    </div>
+    @Html.HiddenFor(f => f.Id)
 
     <div class="form-group row">
         @Html.LabelFor(f => f.FromIATA, new { @class = "col-sm-2 col-form-label" })
@@ -51,7 +45,7 @@
     <div class="form-group row">
         @Html.LabelFor(f => f.PlannedFlightTime, new { @class = "col-form-label col-sm-2" })
         <div class="col-sm-10">
-            @Html.TextBoxFor(w => w.PlannedFlightTime, new { @class = "form-control", @Value = "1:00" })
+            @Html.TextBoxFor(w => w.PlannedFlightTime, new { @class = "form-control"})
         </div>
     </div>
 
