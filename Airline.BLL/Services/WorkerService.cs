@@ -4,6 +4,7 @@ using Airline.BLL.DTO;
 using Airline.BLL.Infrastructure;
 using Airline.BLL.Interfaces;
 using Airline.BLL.Util;
+using Airline.Common.Enums;
 using Airline.DAL.Entities;
 using Airline.DAL.Interfaces;
 using AutoMapper;
@@ -26,6 +27,13 @@ namespace Airline.BLL.Services
         public IEnumerable<WorkerDto> GetWorkers()
         {
             var workers = Database.Workers.GetAll();
+            var workerDtos = Mapper.Map<IEnumerable<Worker>, IEnumerable<WorkerDto>>(workers);
+            return workerDtos;
+        }
+
+        public IEnumerable<WorkerDto> GetWorkersByCrewmanType(CrewmanType type)
+        {
+            var workers = Database.Workers.Find(w => w.CrewmanType == type);
             var workerDtos = Mapper.Map<IEnumerable<Worker>, IEnumerable<WorkerDto>>(workers);
             return workerDtos;
         }

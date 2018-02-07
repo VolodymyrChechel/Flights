@@ -15,6 +15,7 @@ namespace Airline.DAL.Repositories
         private WorkerRepository _workerRepository;
         private FlightRepository _flightRepository;
         private AirportRepository _airportRepository;
+        private CrewRepository _crewRepository;
 
         private UserManager<IdentityUser> _userManager;
         private RoleManager<IdentityRole> _roleManager;
@@ -54,6 +55,17 @@ namespace Airline.DAL.Repositories
                     _airportRepository = new AirportRepository(_db);
 
                 return _airportRepository;
+            }
+        }
+
+        public IGenericRepository<Crew> Crews
+        {
+            get
+            {
+                if (_crewRepository == null)
+                    _crewRepository = new CrewRepository(_db);
+
+                return _crewRepository;
             }
         }
 

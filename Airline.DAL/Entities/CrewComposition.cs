@@ -13,7 +13,7 @@ namespace Airline.DAL.Entities
         public int AircraftPilotAmount { get; set; }
         public int NavigatorOfficerAmount { get; set; }
         public int RadioOperatorAmount { get; set; }
-        public int AirHostessNumber { get; set; }
+        public int AirHostessAmount { get; set; }
 
         public ICollection<Crew> Crews { get; set; }
 

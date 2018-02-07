@@ -312,6 +312,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Dispatcher\DispatcherAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CrewController.cs" />
     <Compile Include="Controllers\FlightController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\WorkerController.cs" />
@@ -319,6 +320,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CrewViewModel.cs" />
     <Compile Include="Models\FlightViewModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\RegisterModel.cs" />
@@ -376,6 +378,7 @@
     <Folder Include="Areas\Dispatcher\Controllers\" />
     <Folder Include="Areas\Dispatcher\Models\" />
     <Folder Include="Areas\Dispatcher\Views\Shared\" />
+    <Folder Include="Views\Crew\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

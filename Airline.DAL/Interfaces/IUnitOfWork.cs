@@ -10,6 +10,7 @@ namespace Airline.DAL.Interfaces
         IGenericRepository<Worker> Workers { get; }
         IGenericRepository<Flight> Flights { get; }
         IGenericRepository<Airport> Airports { get; }
+        IGenericRepository<Crew> Crews { get; }
 
         UserManager<IdentityUser> Users { get; }
         RoleManager<IdentityRole> Roles { get; }

@@ -8,7 +8,8 @@ namespace Airline.DAL.Repositories
     {
         public AirportRepository(AirlineContext context) : base(context)
         {
-            
+
+
         }
     }
 }
