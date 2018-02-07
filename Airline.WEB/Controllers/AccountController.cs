@@ -57,7 +57,7 @@ namespace Airline.WEB.Controllers
         public ActionResult Logout()
         {
             AuthenticationManager.SignOut();
-            return RedirectToAction("List", "Worekr");
+            return RedirectToAction("List", "Worker");
 
         }
 
@@ -89,13 +89,13 @@ namespace Airline.WEB.Controllers
             {
                 Email = "ivan_dispatcher@gmail.com",
                 Password = "ad46D_ewr3",
-                Name = "Ivan Pavlov",
+                Name = "Ivan_Pavlov",
                 Role = "Dispatcher",
             }, new UserDto()
                 {
                     Email = "daria_admin@gmail.com",
                     Password = "ad46D_ewr3",
-                    Name = "Daria Reva",
+                    Name = "Daria_Reva",
                     Role = "Admin",
                 }}, new List<string> { "Dispatcher", "Admin" });
         }

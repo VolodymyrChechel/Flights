@@ -21,10 +21,10 @@ namespace Airline.BLL.Services
             Database = uow;
         }
 
-
+        // bug
         public void Dispose()
         {
-            Database.Dispose();
+         //   Database.Dispose();
         }
 
         public async Task<OperationDetails> Create(UserDto userDto)
@@ -32,7 +32,7 @@ namespace Airline.BLL.Services
             IdentityUser user = await Database.Users.FindByEmailAsync(userDto.Email);
             if (user == null)
             {
-                user = new IdentityUser {Email = userDto.Email, UserName = userDto.Name};
+                user = new IdentityUser {Email = userDto.Email, UserName = userDto.Email};
                 var result = await Database.Users.CreateAsync(user, userDto.Password);
                 if (result.Errors.Any())
                 {
