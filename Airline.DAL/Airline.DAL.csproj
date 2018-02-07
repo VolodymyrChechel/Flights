@@ -56,6 +56,7 @@
     <Compile Include="EF\AirlineContext.cs" />
     <Compile Include="EF\AirlineDbInitializer.cs" />
     <Compile Include="Entities\Airport.cs" />
+    <Compile Include="Entities\CrewComposition.cs" />
     <Compile Include="Entities\Crew.cs" />
     <Compile Include="Entities\FlightPark.cs" />
     <Compile Include="Entities\FlightsSchedule.cs" />

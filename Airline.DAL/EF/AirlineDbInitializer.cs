@@ -71,16 +71,20 @@ namespace Airline.DAL.EF
             var airbus = db.Planes.Add(new Plane() { Name = "Airbus А330-200", Capacity = 240, Velocity = 900 });
             var sukhoi = db.Planes.Add(new Plane() { Name = "Sukhoi SuperJet 100", Capacity = 85, Velocity = 840 });
 
-            //var boeing = db.Planes.First(x => x.Name.Contains("Boeing"));
-            //var airbus = db.Planes.First(x => x.Name.Contains("Airbus"));
-            //var sukhoi = db.Planes.First(x => x.Name.Contains("Sukhoi"));
-
             db.FlightParks.Add(new FlightPark() {Name = "Korolev", Plane = boeing});
             db.FlightParks.Add(new FlightPark() {Name = "Sikorsky", Plane = airbus});
             db.FlightParks.Add(new FlightPark() {Name = "Antonov", Plane = sukhoi});
             db.FlightParks.Add(new FlightPark() {Name = "Paton", Plane = sukhoi});
             db.FlightParks.Add(new FlightPark() {Name = "Glushko ", Plane = sukhoi});
 
+            db.CrewCompositions.Add(new CrewComposition
+            {
+                AircraftPilotAmount = 2,
+                AirHostessNumber = 5,
+                CaptainAmount = 1,
+                NavigatorOfficerAmount = 1,
+                RadioOperatorAmount = 1
+            });
 
 
             db.SaveChanges();

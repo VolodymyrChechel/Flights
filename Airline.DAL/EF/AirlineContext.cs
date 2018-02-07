@@ -21,6 +21,7 @@ namespace Airline.DAL.EF
         public IDbSet<FlightPark> FlightParks { get; set; }
         public IDbSet<Worker> Workers { get; set; }
         public IDbSet<Plane> Planes { get; set; }
+        public IDbSet<CrewComposition> CrewCompositions { get; set; }
         
     }
 }
