@@ -24,20 +24,17 @@ namespace Airline.WEB.Controllers
         }
 
         [MessageFromTempData]
-        public ActionResult List()
-        {
-            var flightDtos = _service.GetFlights();
-            var flights = Mapper.Map<IEnumerable<FlightDto>, IEnumerable<FlightViewModel>>(flightDtos);
-
-            return View(flights);
-        }
-
         public ActionResult List(SearchViewModel searchModel)
         {
+            
             var flightDtos = _service.GetFlights();
             var flights = Mapper.Map<IEnumerable<FlightDto>, IEnumerable<FlightViewModel>>(flightDtos);
+            
+            var listFlightsViewModel = new ListFlightViewModel {FlightsList = flights};
+            if (searchModel != null)
+                listFlightsViewModel.SearchModel = searchModel;
 
-            return View(flights);
+                return View(listFlightsViewModel);
         }
 
         [HttpGet]

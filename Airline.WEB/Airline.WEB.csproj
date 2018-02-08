@@ -322,6 +322,7 @@
     </Compile>
     <Compile Include="Models\CrewCompositionViewModel.cs" />
     <Compile Include="Models\CrewViewModel.cs" />
+    <Compile Include="Models\ListFlightViewModel.cs" />
     <Compile Include="Models\FlightViewModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\RegisterModel.cs" />
