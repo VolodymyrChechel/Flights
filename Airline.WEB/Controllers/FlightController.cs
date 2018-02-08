@@ -32,6 +32,14 @@ namespace Airline.WEB.Controllers
             return View(flights);
         }
 
+        public ActionResult List(SearchViewModel searchModel)
+        {
+            var flightDtos = _service.GetFlights();
+            var flights = Mapper.Map<IEnumerable<FlightDto>, IEnumerable<FlightViewModel>>(flightDtos);
+
+            return View(flights);
+        }
+
         [HttpGet]
         public ActionResult Create()
         {

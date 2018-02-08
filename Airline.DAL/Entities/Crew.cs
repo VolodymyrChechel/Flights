@@ -7,6 +7,7 @@ namespace Airline.DAL.Entities
         public int Id { get; set; }
 
         public ICollection<Worker> Workers { get; set; }
+        public int CrewCompositionId { get; set; }
         public CrewComposition CrewComposition{ get; set; }
         public ICollection<Flight> Flights { get; set; }
 

@@ -23,7 +23,7 @@ namespace Airline.DAL.EF
             db.Airports.Add(new Airport() {IATA = "LWO", City = "Lviv", Name = "Lviv Danylo Halytskyi International Airport" });
             db.Airports.Add(new Airport() {IATA = "ODS", City = "Odessa", Name = "Odessa International Airport" });
 
-            db.Workers.Add(new Worker() { Name = "Volodymyr", Surname = "Shulyayev", BirthDate = DateTime.Parse("1963-3-18"), PhoneNumber = "+380931852367", CrewmanType = CrewmanType.Captain });
+            db.Workers.Add(new Worker() { Name = "Bohdan", Surname = "Shulyayev", BirthDate = DateTime.Parse("1963-3-18"), PhoneNumber = "+380931852367", CrewmanType = CrewmanType.Captain });
             db.Workers.Add(new Worker() { Name = "Roman", Surname = "Shchors", BirthDate = DateTime.Parse("1969-5-28"), PhoneNumber = "+380503925682", CrewmanType = CrewmanType.Captain });
             db.Workers.Add(new Worker() { Name = "Serhii", Surname = "Savaryn", BirthDate = DateTime.Parse("1961-9-6"), PhoneNumber = "+380939939184", CrewmanType = CrewmanType.Captain });
             db.Workers.Add(new Worker() { Name = "Taras", Surname = "Yovenko", BirthDate = DateTime.Parse("1970-12-15"), PhoneNumber = "+380674198768", CrewmanType = CrewmanType.Captain });
@@ -85,7 +85,14 @@ namespace Airline.DAL.EF
                 NavigatorOfficerAmount = 1,
                 RadioOperatorAmount = 1
             });
-
+            db.CrewCompositions.Add(new CrewComposition
+            {
+                AircraftPilotAmount = 3,
+                AirHostessAmount = 7,
+                CaptainAmount = 1,
+                NavigatorOfficerAmount = 1,
+                RadioOperatorAmount = 1
+            });
 
             db.SaveChanges();
         }

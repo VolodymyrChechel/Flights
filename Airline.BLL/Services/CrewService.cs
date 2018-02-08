@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using Airline.BLL.DTO;
 using Airline.BLL.Interfaces;
 using Airline.DAL.Entities;
 using Airline.DAL.Interfaces;
+using AutoMapper;
 
 namespace Airline.BLL.Services
 {
@@ -21,6 +23,25 @@ namespace Airline.BLL.Services
         }
 
         public CrewDto GetCrew(object key)
+        {
+            throw new System.NotImplementedException();
+        }
+        
+        public IEnumerable<CrewCompostionDto> GetCrewCompositions()
+        {
+            var compositions = Database.CrewCompositions.GetAll();
+            var compostionDtos =
+                Mapper.Map<IEnumerable<CrewComposition>, IEnumerable<CrewCompostionDto>>(compositions);
+
+            return compostionDtos;
+        }
+
+        public CrewDto CreateEmptyCrewWithComposition(CrewDto crewDto)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void CreateFullCrew(CrewDto crewDto)
         {
             throw new System.NotImplementedException();
         }

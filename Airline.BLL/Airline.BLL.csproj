@@ -67,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DTO\AirportDto.cs" />
+    <Compile Include="DTO\CrewCompositionDto.cs" />
     <Compile Include="DTO\CrewDto.cs" />
     <Compile Include="DTO\FlightDto.cs" />
     <Compile Include="DTO\UserDto.cs" />
