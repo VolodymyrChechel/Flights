@@ -22,7 +22,7 @@ namespace Airline.WEB.Models
         public string ToName { get; set; }
 
         [Required]
-        public DateTime PlannedDepartureTime { get; set; }
+        public TimeSpan PlannedDepartureTime { get; set; }
         [Required]
         [RegularExpression(ValidationRegex.Time, ErrorMessage = "Duration has no appropriate format XX:XX")]
         public string PlannedFlightTime { get; set; }

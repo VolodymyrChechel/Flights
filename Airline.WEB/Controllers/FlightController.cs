@@ -44,7 +44,7 @@ namespace Airline.WEB.Controllers
 
             ViewBag.AirportSelectList = UtilMethods.CreateListOfSelectItems(airports, airport => airport.IATA, airport => airport.Name);
 
-            return View(new FlightViewModel {PlannedDepartureTime = DateTime.UtcNow});
+            return View(new FlightViewModel {PlannedDepartureTime = TimeSpan.MinValue});
         }
 
         [HttpPost]
