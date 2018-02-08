@@ -4,7 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Airline.BLL.Interfaces;
+using Airline.Common.Enums;
 using Airline.WEB.Models;
+using Airline.WEB.Util;
 
 namespace Airline.WEB.Controllers
 {
@@ -27,9 +29,16 @@ namespace Airline.WEB.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            _workerService.ge
-            var model = new WorkerViewModel();
-            return View();
+            var model = new CrewViewModel();
+
+            var hostess = _workerService.GetWorkersByCrewmanType(CrewmanType.AirHostess);
+            var captains = _workerService.GetWorkersByCrewmanType(CrewmanType.Captain);
+            model.AirHostessSelectList =
+                UtilMethods.CreateListOfSelectItems(hostess, w => w.Id.ToString(), w => $"{w.Id}. {w.Name} {w.Surname}");
+            model.CaptainSelectList =
+                UtilMethods.CreateListOfSelectItems(captains, w => w.Id.ToString(), w => $"{w.Id}. {w.Name} {w.Surname}");
+
+            return View(model);
         }
     }
 }

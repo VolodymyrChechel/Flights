@@ -33,7 +33,8 @@ namespace Airline.BLL.Services
 
         public IEnumerable<WorkerDto> GetWorkersByCrewmanType(CrewmanType type)
         {
-            var workers = Database.Workers.Find(w => w.CrewmanType == type);
+            var workers = Database.Workers.Find(w => 1 == 1);
+            //var workers = Database.Workers.Find(w => w.CrewmanType == type);
             var workerDtos = Mapper.Map<IEnumerable<Worker>, IEnumerable<WorkerDto>>(workers);
             return workerDtos;
         }

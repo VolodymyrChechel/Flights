@@ -1,0 +1,19 @@
+﻿@model CrewViewModel
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm())
+{
+    <div>
+        @Html.LabelFor(m => m.SelectedCaptains)
+        @Html.ListBoxFor(m => m.SelectedCaptains, Model.CaptainSelectList)
+    </div>
+
+    <div>
+        @Html.LabelFor(m => m.SelectedHostess)
+        @Html.ListBoxFor(m => m.SelectedHostess, Model.CaptainSelectList)
+    </div>
+}

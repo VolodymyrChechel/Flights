@@ -363,6 +363,8 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Flight\Delete.cshtml" />
+    <Content Include="Views\Crew\List.cshtml" />
+    <Content Include="Views\Crew\Create.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -378,7 +380,6 @@
     <Folder Include="Areas\Dispatcher\Controllers\" />
     <Folder Include="Areas\Dispatcher\Models\" />
     <Folder Include="Areas\Dispatcher\Views\Shared\" />
-    <Folder Include="Views\Crew\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

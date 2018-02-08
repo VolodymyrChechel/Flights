@@ -30,7 +30,7 @@ namespace Airline.DAL.Repositories
 
         public IQueryable<T> Find(Func<T, bool> predicate)
         {
-            return db.Set<T>().Where(predicate) as IQueryable<T>;
+            return db.Set<T>().Where(predicate).AsQueryable();
         }
 
         public T Get(object key)
@@ -45,13 +45,6 @@ namespace Airline.DAL.Repositories
 
         public virtual void Update(T item)
         {
-            //var local = db.Set<T>().Find(item);
-            //if (local != null)
-            //{
-            //    yourDbContext.Entry(local).State = EntityState.Detached;
-            //}
-            //yourDbContext.Entry(applicationModel).State = EntityState.Modified;
-            //db.Entry(item).State = EntityState.Modified;    
             db.Set<T>().AddOrUpdate(item);
         }
     }

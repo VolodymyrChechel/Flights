@@ -21,9 +21,13 @@ namespace Airline.WEB.Models
         public int CrewCompositionId { get; set; }
 
         public IEnumerable<SelectListItem> CaptainSelectList { get; set; }
+        public IEnumerable<string> SelectedCaptains { get; set; }
+
         public IEnumerable<SelectListItem> AircraftPilotSelectList { get; set; }
         public IEnumerable<SelectListItem> NavigatorOfficerSelectList { get; set; }
         public IEnumerable<SelectListItem> RadioOperatorSelectList { get; set; }
         public IEnumerable<SelectListItem> AirHostessSelectList { get; set; }
+        public IEnumerable<int> SelectedHostess { get; set; }
+
     }
 }

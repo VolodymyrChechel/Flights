@@ -80,7 +80,7 @@ namespace Airline.DAL.EF
             db.CrewCompositions.Add(new CrewComposition
             {
                 AircraftPilotAmount = 2,
-                AirHostessNumber = 5,
+                AirHostessAmount = 5,
                 CaptainAmount = 1,
                 NavigatorOfficerAmount = 1,
                 RadioOperatorAmount = 1
