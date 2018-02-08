@@ -17,6 +17,7 @@ namespace Airline.DAL.Repositories
         private AirportRepository _airportRepository;
         private CrewRepository _crewRepository;
         private CrewCompositionRepositiory _crewCompositionRepositiory;
+        private TimetableRepository _timetableRepository;
 
         private UserManager<IdentityUser> _userManager;
         private RoleManager<IdentityRole> _roleManager;
@@ -67,6 +68,17 @@ namespace Airline.DAL.Repositories
                     _crewRepository = new CrewRepository(_db);
 
                 return _crewRepository;
+            }
+        }
+
+        public IGenericRepository<Timetable> Timetables
+        {
+            get
+            {
+                if (_timetableRepository == null)
+                    _timetableRepository = new TimetableRepository(_db);
+
+                return _timetableRepository;
             }
         }
 
