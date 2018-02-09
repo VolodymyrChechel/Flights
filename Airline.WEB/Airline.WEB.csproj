@@ -309,8 +309,10 @@
     <Compile Include="App_Start\IocContainer.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.cs" />
+    <Compile Include="App_Start\TimeSpanValueProviderFactory.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Dispatcher\DispatcherAreaRegistration.cs" />
+    <Compile Include="Binders\TimeSpanBinder.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CrewController.cs" />
     <Compile Include="Controllers\FlightController.cs" />

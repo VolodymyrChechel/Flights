@@ -14,9 +14,9 @@ namespace Airline.WEB.Util
 
             CreateMap<FlightDto, FlightViewModel>().
             AfterMap((s, d) =>
-            {
-                var ft = s.PlannedFlightTime;
-                d.PlannedFlightTime = s.PlannedFlightTime.ToString(@"hh\:mm");
+                {
+                    var ft = s.PlannedFlightTime;
+                d.PlannedFlightTime = ft.ToString(@"hh\:mm");
             });
             CreateMap<FlightViewModel, FlightDto>().
                 AfterMap((s, d) => d.PlannedFlightTime = TimeSpan.Parse(s.PlannedFlightTime));
