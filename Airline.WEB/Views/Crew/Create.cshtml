@@ -12,78 +12,151 @@
     <div class="form-group row">
         @Html.LabelFor(m => m.CrewCompositionId, new { @class = "col-sm-2 col-form-label" })
         <div class="col">
-            @Html.DropDownListFor(m => m.CrewCompositionId, Model.CompositionSelectList, new { @class = "form-control col-sm-10" })
+            @Html.DropDownListFor(m => m.CrewCompositionId, Model.CompositionSelectList, new { @class = "form-control col-sm-10"})
         </div>
     </div>
 
     <div class="form-group row">
-        @Html.LabelFor(m => m.SelectedCaptains, new { @class = "col-sm-2 col-form-label" })
+        @Html.LabelFor(m => m.SelectedCaptains, new { @class = "col-sm-2 col-form-label progr" })
         <div class="col">
-            @Html.ListBoxFor(m => m.SelectedCaptains, Model.CaptainSelectList, new { @class = "form-control  col-sm-10" })
+            @Html.ListBoxFor(m => m.SelectedCaptains, Model.CaptainSelectList, new { @class = "form-control col-sm-10", size = @Model.CaptainSelectList.Count() })
         </div>
         
     </div>
 
     <div class="form-group row">
-        @Html.LabelFor(m => m.SelectedAircraftPilots, new { @class = "col-sm-2 col-form-label" })
+        @Html.LabelFor(m => m.SelectedAircraftPilots, new { @class = "col-sm-2 col-form-label progr" })
         <div  class="col">
-            @Html.ListBoxFor(m => m.SelectedAircraftPilots, Model.AircraftPilotSelectList, new { @class = "form-control col-sm-10" })
+            @Html.ListBoxFor(m => m.SelectedAircraftPilots, Model.AircraftPilotSelectList, new { @class = "form-control col-sm-10", size = @Model.AircraftPilotSelectList.Count() })
         </div>
     </div>
 
     <div class="form-group row">
-        @Html.LabelFor(m => m.SelectedNavigatorOfficers, new { @class = "col-sm-2 col-form-label" })
+        @Html.LabelFor(m => m.SelectedNavigatorOfficers, new { @class = "col-sm-2 col-form-label progr" })
         <div class="col">
-            @Html.ListBoxFor(m => m.SelectedNavigatorOfficers, Model.NavigatorOfficerSelectList, new { @class = "form-control col-sm-10" })
+            @Html.ListBoxFor(m => m.SelectedNavigatorOfficers, Model.NavigatorOfficerSelectList, new { @class = "form-control col-sm-10", size = @Model.NavigatorOfficerSelectList.Count() })
         </div>
     </div>
 
     <div class="form-group row">
-        @Html.LabelFor(m => m.SelectedRadioOperators, new { @class = "col-sm-2 col-form-label" })
+        @Html.LabelFor(m => m.SelectedRadioOperators, new { @class = "col-sm-2 col-form-label progr" })
         <div class="col">
-            @Html.ListBoxFor(m => m.SelectedRadioOperators, Model.RadioOperatorSelectList, new { @class = "form-control col-sm-10" })
+            @Html.ListBoxFor(m => m.SelectedRadioOperators, Model.RadioOperatorSelectList, new { @class = "form-control col-sm-10", size = @Model.RadioOperatorSelectList.Count() })
         </div>
     </div>
     
     <div class="form-group row">
-        @Html.LabelFor(m => m.SelectedHostess, new { @class = "col-sm-2 col-form-label" })
+        @Html.LabelFor(m => m.SelectedHostess, new { @class = "col-sm-2 col-form-label progr" })
         <div class="col">
-            @Html.ListBoxFor(m => m.SelectedHostess, Model.AirHostessSelectList, new { @class = "form-control col-sm-10" })
+            @Html.ListBoxFor(m => m.SelectedHostess, Model.AirHostessSelectList, new { @class = "form-control col-sm-10", size = @Model.AirHostessSelectList.Count() })
         </div>
     </div>
 
     <div class="form-group row">
         <div class="col-sm-2 offset-sm-2">
-            <input type="submit" class="btn btn-success" value="Create crew">
+            <input type="submit" class="btn btn-success" id="sendData" value="Create crew">
         </div>
     </div>
+}
+
+@section Styles{
+    <style>
+        select {
+            overflow-y: auto;
+        }
+    </style>
 }
 
 @section Scripts
 {
     <script>
-        $('option').mousedown(function (e) {
+        var path = "@Url.Action("GetComposition")";
+        var crewComposition;
+        var crewCompositionOnPage = 
+        {
+                "CaptainAmount": 0,
+                "AirHostessAmount": 0,
+                "AircraftPilotAmount":0, 
+                "NavigatorOfficerAmount": 0,
+                "RadioOperatorAmount": 0
+            }
+
+        var clickCounter = 0;
+        $('#sendData').click(function () {
+            ++clickCounter;
+
+            console.log('dwadwad');
+            if (clickCounter == 3)
+                return true;
+            return false;
+        });
+
+        $('#CrewCompositionId').change(function() {
+            var crewCompositionId = this.value;
+            var da = { "id": crewCompositionId };
+
+            $.ajax({
+                dataType: "json",
+                url: path,
+                data: da,
+                success: function (e) {
+                    crewComposition = e;
+                    var labels = $('.progr');
+                    AppendStatusToLabel(labels);
+                }
+            });
+
+
+
+        }).trigger("change");
+        
+        $('option').mousedown(function(e) {
             e.preventDefault();
             $(this).prop('selected', !$(this).prop('selected'));
 
-            var inputValue = $(this).parent().prop('id');
-
-            var labl = $('label').filter(function(){
-                return $(this).prop('for') === inputValue;
+            var selectElement = $(this).parent();
+            var labl = $('.progr').filter(function() {
+                return $(this).prop('for') === selectElement.prop('id');
             });
-            //console.log(this);
-            //console.log(parent);
-            console.log(labl[0]);
+
+            AppendStatusToLabel(labl);
 
             return false;
         });
 
-        var selections = $('#CrewCompositionId')[0];
-        console.log();
-        console.log(selections);
+        function AppendStatusToLabel(labels) {
+            for (var i = 0; i < labels.length; i++) {
+                var label = $(labels[i]);
+                var forLabel = label.prop("for").toUpperCase();
+                var select = $("#" + label.prop("for"));
 
-        function Composition() {
-            
+                var numberSelected = select.find(':selected').length;
+
+                var message;
+                if (forLabel.includes("CAPTAIN")) {
+                    crewCompositionOnPage.CaptainAmount = numberSelected;
+                    message = numberSelected + '/' + crewComposition.CaptainAmount;
+                }
+                else if (forLabel.includes("HOSTESS")) {
+                    crewCompositionOnPage.AirHostessAmount = numberSelected;
+                    message = numberSelected + '/' + crewComposition.AirHostessAmount;
+                }
+                else if (forLabel.includes("PILOT")) {
+                    crewCompositionOnPage.AircraftPilotAmount = numberSelected;
+                    message = numberSelected + '/' + crewComposition.AircraftPilotAmount;
+                }
+                else if (forLabel.includes("NAVIGATOR")) {
+                    crewCompositionOnPage.NavigatorOfficerAmount = numberSelected;
+                    message = numberSelected + '/' + crewComposition.NavigatorOfficerAmount;
+                }
+                else if (forLabel.includes("RADIO")) {
+                    crewCompositionOnPage.RadioOperatorAmount = numberSelected;
+                    message = numberSelected + '/' + crewComposition.RadioOperatorAmount;
+                }
+
+                label.children().remove();
+                label.append("<div class='info'>" + message + " selected </div>");
+            }
         }
     </script>
 }

@@ -6,12 +6,13 @@
     <title>@ViewBag.Title</title>
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" type="text/css" />
     @RenderSection("Styles", required: false)
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-    <a class="navbar-brand" href="#">Airline</a>
+    <a class="navbar-brand" href="@Url.Action("List", "Worker")">Airline</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -19,13 +20,24 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="@Url.Action("List", "Worker")">WORKER</a>
+                <a class="nav-link" href="@Url.Action("List", "Worker")">
+                    <span class="fa fa-address-card"></span> WORKER
+                </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="@Url.Action("List", "Flight")">FLIGHT</a>
+                <a class="nav-link" href="@Url.Action("List", "Flight")">
+                    <span class="fa fa-plane"></span> FLIGHT
+                </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="@Url.Action("List", "Crew")">CREW</a>
+                <a class="nav-link" href="@Url.Action("List", "Crew")">
+                    <span class="fa fa-users"></span> CREW
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("List", "Timetable")">
+                    <span class="fa fa-calendar"></span> TIMETABLE
+                </a>
             </li>
         </ul>
 
@@ -33,7 +45,9 @@
             @if (!User.Identity.IsAuthenticated)
             {
                 <li class="nav-item">
-                    <a class="nav-link" href="@Url.Action("Login", "Account")">Log in</a>
+                    <a class="nav-link" href="@Url.Action("Login", "Account")">
+                        <span class="fa fa-sign-in"></span> Log in
+                    </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="@Url.Action("Register", "Account")">Register</a>
@@ -46,7 +60,9 @@
                         - @Roles.GetRolesForUser(User.Identity.Name).Length </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="@Url.Action("Logout", "Account")">Log out</a>
+                    <a class="nav-link" href="@Url.Action("Logout", "Account")">
+                        <span class="fa fa-sign-out"></span> Log out
+                    </a>
                 </li>
             }
         </ul>

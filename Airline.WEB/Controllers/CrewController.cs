@@ -60,5 +60,11 @@ namespace Airline.WEB.Controllers
         {
             return View(model);
         }
+
+        public JsonResult GetComposition(int id)
+        {
+            var compostion = _service.GetCrewComposition(id);
+            return Json(compostion, JsonRequestBehavior.AllowGet);
+        }
     }
 }

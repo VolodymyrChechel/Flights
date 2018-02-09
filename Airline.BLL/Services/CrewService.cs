@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Airline.BLL.DTO;
 using Airline.BLL.Interfaces;
@@ -34,6 +35,21 @@ namespace Airline.BLL.Services
                 Mapper.Map<IEnumerable<CrewComposition>, IEnumerable<CrewCompostionDto>>(compositions);
 
             return compostionDtos;
+        }
+
+        public CrewCompostionDto GetCrewComposition(object key)
+        {
+            if (key == null)
+                throw new ArgumentException("Crew composition's id was not set");
+
+            var crewComposition = Database.CrewCompositions.Get(key);
+
+            if (crewComposition == null)
+                throw new ArgumentException($"Crew composition with key={key} was not found");
+
+            var crewCompostionDto = Mapper.Map<CrewComposition, CrewCompostionDto>(crewComposition);
+
+            return crewCompostionDto;
         }
 
         public CrewDto CreateEmptyCrewWithComposition(CrewDto crewDto)

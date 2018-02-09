@@ -1,4 +1,4 @@
-﻿@model ListFlightViewModel
+﻿@model IEnumerable<FlightViewModel>
 @{
     ViewBag.Title = "List of flights";
 }
@@ -7,19 +7,6 @@
     <div class="header col-12">
         <h3 class="float-left">@ViewBag.Title</h3>
         <a href="@Url.Action("Create")" class="btn btn-primary float-right">Create new flight</a>
-    </div>
-</div>
-
-<div class="row">
-    <div class=" header col-12">
-        @using (Html.BeginForm())
-    {
-        @Html.EnumDropDownListFor(m=>m.SearchModel.Selection)
-
-            @Html.EditorFor(m=>m.SearchModel.SelectionKeyword)
-            @Html.EditorFor(m=>m.SearchModel.SortField)
-            <input type="submit">
-    }
     </div>
 </div>
 
@@ -35,7 +22,7 @@
         <th> To </th>
     </tr>
     </thead>
-    @foreach (var item in @Model.FlightsList)
+    @foreach (var item in @Model)
     {
         <tr class="clickable-row" data-href="@Url.Action("Edit", "Flight", new {id=item.Id})">
             <td>@item.Id</td>
@@ -54,10 +41,5 @@
                 window.location = $(this).data("href");
             });
         });
-
-        var viewSettings = {
-        };
-
-        console.log(viewSettings);
     </script>
 }

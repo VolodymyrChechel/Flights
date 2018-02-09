@@ -9,6 +9,7 @@ namespace Airline.BLL.Interfaces
         IEnumerable<CrewDto> GetCrews();
         CrewDto GetCrew(object key);
         IEnumerable<CrewCompostionDto> GetCrewCompositions();
+        CrewCompostionDto GetCrewComposition(object key);
         CrewDto CreateEmptyCrewWithComposition(CrewDto crewDto);
         void CreateFullCrew(CrewDto crewDto);
         void EditCrew(CrewDto crewDto);

@@ -26,7 +26,5 @@ namespace Airline.WEB.Models
         [Required]
         [RegularExpression(ValidationRegex.Time, ErrorMessage = "Duration has no appropriate format XX:XX")]
         public string PlannedFlightTime { get; set; }
-
-        public SearchViewModel SearchModel { get; set; }
     }
 }
