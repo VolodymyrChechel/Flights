@@ -1,4 +1,4 @@
-﻿@model TimetableModel
+﻿@model TimetableCreateModel
 @{
     ViewBag.Title = "Create";
 }
@@ -12,18 +12,35 @@
     <div class="form-group row">
         @Html.LabelFor(m => m.FlightId, new { @class = "col-sm-2 col-form-label" })
         <div class="col">
-            @Html.DropDownListFor(m => m.FlightId, Model.CompositionSelectList, new { @class = "form-control col-sm-10" })
+            @Html.DropDownListFor(m => m.FlightId, Model.FlightSelectListItems, new { @class = "form-control col-sm-10" })
         </div>
     </div>
 
     <div class="form-group row">
-        @Html.LabelFor(m => m.FlightId, new { @class = "col-sm-2 col-form-label progr" })
+        @Html.LabelFor(m => m.CrewId, new { @class = "col-sm-2 col-form-label" })
         <div class="col">
-            @Html.DropDownList(m => m.FlightParkId, Model.CaptainSelectList, new { @class = "form-control col-sm-10", size = @Model.CaptainSelectList.Count() })
+            @Html.DropDownListFor(m => m.CrewId, Model.CrewSelectListItems, new { @class = "form-control col-sm-10" })
         </div>
-
     </div>
 
+    <div class="form-group row">
+        @Html.LabelFor(m => m.FlightParkId, new { @class = "col-sm-2 col-form-label" })
+        <div class="col">
+            @Html.DropDownListFor(m => m.FlightParkId, Model.FlightParkSelectListItems, new { @class = "form-control col-sm-10" })
+        </div>
+    </div>
+
+    <div class="form-group row">
+        @Html.LabelFor(f => f.DateTime, new {@class = "col-form-label col-sm-2"})
+        <div class="col-sm-10">
+            @Html.TextBoxFor(w => w.DateTime, new
+            {
+                id = "datetimepicker",
+                @class = "form-control",
+                data_toggle = "datetimepicker",
+                data_target = "#datetimepicker"
+            })
+        </div>
     </div>
 
     <div class="form-group row">
@@ -33,103 +50,48 @@
     </div>
 }
 
+
 @section Styles{
+    <link href="~/Content/bootstrap-datetimepicker.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" type="text/css" />
     <style>
-        select {
-            overflow-y: auto;
-        }
     </style>
 }
 
-@section Scripts
-{
+@section Scripts{
+    <script src="~/Scripts/moment.min.js"></script>
+    <script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
+
     <script>
-        var path = "@Url.Action("GetComposition")";
-        var crewComposition;
-        var crewCompositionOnPage =
-        {
-                "CaptainAmount": 0,
-                "AirHostessAmount": 0,
-                "AircraftPilotAmount":0,
-                "NavigatorOfficerAmount": 0,
-                "RadioOperatorAmount": 0
-            }
+        $(function () {
+            $('#datetimepicker').datetimepicker();
+        });
 
-        $('#sendData').click(function () {
-            for (var prop in crewCompositionOnPage) {
-                if (crewComposition[prop] != crewCompositionOnPage[prop]) {
-                    alert("Сurrent composition does not match the required!");
-                    return false;
-                }
+        (function ($) {
+            $.validator.addMethod('notEqualTo',
+                function (value, element, param) {
+                    return this.optional(element) || value != $(param).val();
+                },
+                '');
+
+            $.validator.unobtrusive.adapters.add('notequalto',
+                ['other'],
+                function (options) {
+                    options.rules['notEqualTo'] = '#' + options.params.other;
+                    if (options.message) {
+                        options.messages['notEqualTo'] = options.message;
+                    }
+                });
+        })(jQuery);
+
+        $(document).mouseup(function (e) {
+            var container = $(".bootstrap-datetimepicker-widget");
+
+            // if the target of the click isn't the container nor a descendant of the container
+            if (!container.is(e.target) && container.has(e.target).length === 0) {
+                $('#datetimepicker').datetimepicker("hide");
             }
         });
 
-        $('#CrewCompositionId').change(function() {
-            var crewCompositionId = this.value;
-            var da = { "id": crewCompositionId };
-
-            $.ajax({
-                dataType: "json",
-                url: path,
-                data: da,
-                success: function (e) {
-                    crewComposition = e;
-                    var labels = $('.progr');
-                    AppendStatusToLabel(labels);
-                }
-            });
-
-
-
-        }).trigger("change");
-
-        $('option').mousedown(function(e) {
-            e.preventDefault();
-            $(this).prop('selected', !$(this).prop('selected'));
-
-            var selectElement = $(this).parent();
-            var labl = $('.progr').filter(function() {
-                return $(this).prop('for') === selectElement.prop('id');
-            });
-
-            AppendStatusToLabel(labl);
-
-            return false;
-        });
-
-        function AppendStatusToLabel(labels) {
-            for (var i = 0; i < labels.length; i++) {
-                var label = $(labels[i]);
-                var forLabel = label.prop("for").toUpperCase();
-                var select = $("#" + label.prop("for"));
-
-                var numberSelected = select.find(':selected').length;
-
-                var message;
-                if (forLabel.includes("CAPTAIN")) {
-                    crewCompositionOnPage.CaptainAmount = numberSelected;
-                    message = numberSelected + '/' + crewComposition.CaptainAmount;
-                }
-                else if (forLabel.includes("HOSTESS")) {
-                    crewCompositionOnPage.AirHostessAmount = numberSelected;
-                    message = numberSelected + '/' + crewComposition.AirHostessAmount;
-                }
-                else if (forLabel.includes("PILOT")) {
-                    crewCompositionOnPage.AircraftPilotAmount = numberSelected;
-                    message = numberSelected + '/' + crewComposition.AircraftPilotAmount;
-                }
-                else if (forLabel.includes("NAVIGATOR")) {
-                    crewCompositionOnPage.NavigatorOfficerAmount = numberSelected;
-                    message = numberSelected + '/' + crewComposition.NavigatorOfficerAmount;
-                }
-                else if (forLabel.includes("RADIO")) {
-                    crewCompositionOnPage.RadioOperatorAmount = numberSelected;
-                    message = numberSelected + '/' + crewComposition.RadioOperatorAmount;
-                }
-
-                label.children().remove();
-                label.append("<div class='info'>" + message + " selected </div>");
-            }
-        }
     </script>
 }

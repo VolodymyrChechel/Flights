@@ -65,7 +65,11 @@ namespace Airline.DAL.EF
             db.Workers.Add(new Worker() { Name = "Inna", Surname = "Rodchenko", BirthDate = DateTime.Parse("1992-8-20"), PhoneNumber = "+380960066654", CrewmanType = CrewmanType.AirHostess });
             db.Workers.Add(new Worker() { Name = "Liliya", Surname = "Sokulska", BirthDate = DateTime.Parse("1994-8-30"), PhoneNumber = "+380932830762", CrewmanType = CrewmanType.AirHostess });
             db.Workers.Add(new Worker() { Name = "Inna", Surname = "Tymoshenko", BirthDate = DateTime.Parse("1992-3-16"), PhoneNumber = "+380990921024", CrewmanType = CrewmanType.AirHostess });
-            db.Workers.Add(new Worker() { Name = "Kseniya", Surname = "Chachula", BirthDate = DateTime.Parse("1992-2-27"), PhoneNumber = "+380679904500", CrewmanType = CrewmanType.AirHostess });
+            db.Workers.Add(new Worker() { Name = "Kseniya", Surname = "Chachula", BirthDate = DateTime.Parse("1992-2-27"), PhoneNumber = "+380679904506", CrewmanType = CrewmanType.AirHostess });
+            db.Workers.Add(new Worker() { Name = "Anna", Surname = "Vovk", BirthDate = DateTime.Parse("1992-2-27"), PhoneNumber = "+380679704500", CrewmanType = CrewmanType.AirHostess });
+            db.Workers.Add(new Worker() { Name = "Kseniya", Surname = "Holub", BirthDate = DateTime.Parse("1992-2-27"), PhoneNumber = "+380679904500", CrewmanType = CrewmanType.AirHostess });
+            db.Workers.Add(new Worker() { Name = "Vira", Surname = "Danilenko", BirthDate = DateTime.Parse("1992-2-27"), PhoneNumber = "+380674404540", CrewmanType = CrewmanType.AirHostess });
+            db.Workers.Add(new Worker() { Name = "Alla", Surname = "Avramenko", BirthDate = DateTime.Parse("1992-2-27"), PhoneNumber = "+380679104500", CrewmanType = CrewmanType.AirHostess });
 
             var boeing = db.Planes.Add(new Plane() { Name = "Boeing 737-800", Capacity = 150, Velocity = 900 });
             var airbus = db.Planes.Add(new Plane() { Name = "Airbus А330-200", Capacity = 240, Velocity = 900 });
@@ -90,9 +94,11 @@ namespace Airline.DAL.EF
 
             db.FlightParks.Add(new FlightPark() {Name = "Korolev", Plane = boeing, CrewComposition = crew2});
             db.FlightParks.Add(new FlightPark() {Name = "Sikorsky", Plane = airbus, CrewComposition = crew2});
+            db.FlightParks.Add(new FlightPark() {Name = "Shevchenko", Plane = airbus, CrewComposition = crew1});
             db.FlightParks.Add(new FlightPark() {Name = "Antonov", Plane = sukhoi, CrewComposition = crew1 });
             db.FlightParks.Add(new FlightPark() {Name = "Paton", Plane = sukhoi, CrewComposition = crew1 });
             db.FlightParks.Add(new FlightPark() {Name = "Glushko ", Plane = sukhoi, CrewComposition = crew1 });
+            db.FlightParks.Add(new FlightPark() {Name = "Dovzhenko", Plane = sukhoi, CrewComposition = crew1 });
 
             db.SaveChanges();
         }

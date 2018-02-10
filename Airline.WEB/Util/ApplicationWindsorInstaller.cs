@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
+using Airline.BLL.DTO;
 using Airline.BLL.Interfaces;
 using Airline.BLL.Services;
 using Castle.MicroKernel.Registration;
@@ -19,6 +20,8 @@ namespace Airline.WEB.Util
             container.Register(Component.For<IAirportService>().ImplementedBy<AirportService>());
             container.Register(Component.For<IUserService>().ImplementedBy<UserService>());
             container.Register(Component.For<ICrewService>().ImplementedBy<CrewService>());
+            container.Register(Component.For<IFlightParkService>().ImplementedBy<FlightParkService>());
+            container.Register(Component.For<ITimetableService>().ImplementedBy<TimetableService>());
 
             var controllers = Assembly.GetExecutingAssembly().GetTypes().
                 Where(x => x.BaseType == typeof(Controller)).ToList();

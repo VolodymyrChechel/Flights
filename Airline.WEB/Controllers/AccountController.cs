@@ -76,7 +76,10 @@ namespace Airline.WEB.Controllers
                 var userDto = Mapper.Map<RegisterModel, UserDto>(model);
                 OperationDetails operationDetails = await UserService.Create(userDto);
                 if (operationDetails.Succeded)
-                    return View("SuccessRegister");
+                {
+                    TempData["Message"] = "Account successfully registered";
+                    return RedirectToAction("List", "Flight");
+                }
                 else
                     ModelState.AddModelError(operationDetails.Property, operationDetails.Message);
             }

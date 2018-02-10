@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -16,6 +17,13 @@ namespace Airline.WEB
 
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+        }
+
+        protected void Application_Error(object sender, EventArgs e)
+        {
+            Exception exception = Server.GetLastError();
+            Server.ClearError();
+            //Response.("Error");
         }
     }
 }

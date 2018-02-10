@@ -14,6 +14,7 @@ namespace Airline.DAL.Repositories
 
         private WorkerRepository _workerRepository;
         private FlightRepository _flightRepository;
+        private FlightParkRepository _flightParkRepository;
         private AirportRepository _airportRepository;
         private CrewRepository _crewRepository;
         private CrewCompositionRepositiory _crewCompositionRepositiory;
@@ -46,6 +47,17 @@ namespace Airline.DAL.Repositories
                     _flightRepository = new FlightRepository(_db);
 
                 return _flightRepository;
+            }
+        }
+
+        public IGenericRepository<FlightPark> FlightParks
+        {
+            get
+            {
+                if (_flightParkRepository == null)
+                    _flightParkRepository = new FlightParkRepository(_db);
+
+                return _flightParkRepository;
             }
         }
 

@@ -23,12 +23,11 @@ namespace Airline.BLL.Services
         public IEnumerable<CrewDto> GetCrews()
         {
             var crews = Database.Crews.GetAll().Include(c => c.Workers);
-            //var crewDtos = Mapper.Map<IEnumerable<Crew>, IEnumerable<CrewDto>>(crews);
             var crewDtos = new List<CrewDto>();
 
             foreach (var crew in crews)
             {
-            string workerSummary = "";
+                string workerSummary = "";
                 var workers = crew.Workers;
                 foreach (var worker in workers)
                 {
@@ -40,12 +39,6 @@ namespace Airline.BLL.Services
                     Id = crew.Id,CrewCompositionId = crew.CrewCompositionId,
                     WorkersDescription = workerSummary
                 });
-                //foreach (var VARIABLE in COLLECTION)
-                //{
-                    
-                //}
-
-
             }
             return crewDtos;
         }

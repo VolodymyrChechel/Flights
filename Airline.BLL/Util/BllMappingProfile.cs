@@ -25,6 +25,8 @@ namespace Airline.BLL.Util
 
             CreateMap<Crew, CrewDto>();
             CreateMap<CrewDto, Crew>();
+
+            CreateMap<FlightPark, FlightParkDto>();
         }
     }
 }

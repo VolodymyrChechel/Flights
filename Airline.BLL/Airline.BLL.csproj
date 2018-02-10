@@ -70,11 +70,13 @@
     <Compile Include="DTO\CrewCompositionDto.cs" />
     <Compile Include="DTO\CrewDto.cs" />
     <Compile Include="DTO\FlightDto.cs" />
+    <Compile Include="DTO\FlightParkDto.cs" />
     <Compile Include="DTO\TimetableDto.cs" />
     <Compile Include="DTO\UserDto.cs" />
     <Compile Include="DTO\WorkerDto.cs" />
     <Compile Include="Infrastructure\OperationDetails.cs" />
     <Compile Include="Infrastructure\ValidationException.cs" />
+    <Compile Include="Interfaces\IFlightParkService.cs" />
     <Compile Include="Interfaces\ITimetableService.cs" />
     <Compile Include="Interfaces\ICrewService.cs" />
     <Compile Include="Interfaces\IFlightService.cs" />
@@ -82,6 +84,7 @@
     <Compile Include="Interfaces\IUserService.cs" />
     <Compile Include="Interfaces\IWorkerService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\FlightParkService.cs" />
     <Compile Include="Services\TimetableService.cs" />
     <Compile Include="Services\AirportService.cs" />
     <Compile Include="Services\CrewService.cs" />
