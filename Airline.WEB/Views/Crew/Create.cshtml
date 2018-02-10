@@ -81,14 +81,13 @@
                 "RadioOperatorAmount": 0
             }
 
-        var clickCounter = 0;
         $('#sendData').click(function () {
-            ++clickCounter;
-
-            console.log('dwadwad');
-            if (clickCounter == 3)
-                return true;
-            return false;
+            for (var prop in crewCompositionOnPage) {
+                if (crewComposition[prop] != crewCompositionOnPage[prop]) {
+                    alert("Сurrent composition does not match the required!");
+                    return false;
+                }
+            }
         });
 
         $('#CrewCompositionId').change(function() {

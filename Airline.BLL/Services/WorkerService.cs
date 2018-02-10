@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Airline.BLL.DTO;
 using Airline.BLL.Infrastructure;
 using Airline.BLL.Interfaces;
@@ -31,9 +32,10 @@ namespace Airline.BLL.Services
             return workerDtos;
         }
 
-        public IEnumerable<WorkerDto> GetWorkersByCrewmanType(CrewmanType type)
+        public IEnumerable<WorkerDto> GetWorkersByCrewmanType(CrewmanType type, bool isVacant)
         {
-            var workers = Database.Workers.Find(w => w.CrewmanType == type);
+            var workers = Database.Workers.Find(w => w.CrewmanType == type && w.Crews == null);
+            
             var workerDtos = Mapper.Map<IEnumerable<Worker>, IEnumerable<WorkerDto>>(workers);
             return workerDtos;
         }

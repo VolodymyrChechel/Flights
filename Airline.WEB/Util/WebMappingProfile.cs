@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Airline.BLL.DTO;
 using Airline.WEB.Models;
 using AutoMapper;
@@ -22,6 +23,13 @@ namespace Airline.WEB.Util
                 AfterMap((s, d) => d.PlannedFlightTime = TimeSpan.Parse(s.PlannedFlightTime));
 
             CreateMap<LoginModel, UserDto>();
+
+            CreateMap<CrewViewModel, CrewDto>().AfterMap((s, d) =>
+            {
+                d.SelectedWorkersId = s.SelectedAircraftPilots.Concat(s.SelectedCaptains).Concat(s.SelectedHostess)
+                    .Concat(s.SelectedRadioOperators).Concat(s.SelectedNavigatorOfficers).ToList();
+            });
+            CreateMap<CrewDto, CrewViewModel>();
         }
     }
 }

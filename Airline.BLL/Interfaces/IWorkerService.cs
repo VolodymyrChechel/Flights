@@ -8,7 +8,7 @@ namespace Airline.BLL.Interfaces
     public interface IWorkerService
     {
         IEnumerable<WorkerDto> GetWorkers();
-        IEnumerable<WorkerDto> GetWorkersByCrewmanType(CrewmanType type);
+        IEnumerable<WorkerDto> GetWorkersByCrewmanType(CrewmanType type, bool isVacant = false);
         WorkerDto GetWorker(object key);
         void CreateWorker(WorkerDto workerDto);
         void EditWorker(WorkerDto workerDto);

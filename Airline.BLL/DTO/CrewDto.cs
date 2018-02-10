@@ -13,10 +13,9 @@ namespace Airline.BLL.DTO
         public int CrewCompositionRadioOperatorAmount { get; set; }
         public int CrewCompositionAirHostessNumber { get; set; }
 
-        public int CrewCompositionId { get; set; } = 1;
-        //public CrewComposition CrewComposition { get; set; }
-        //public ICollection<Worker> Workers { get; set; }
-        //public ICollection<Flight> Flights { get; set; }
+        public int CrewCompositionId { get; set; }
+
+        public IEnumerable<int> SelectedWorkersId { get; set; }
 
     }
 }

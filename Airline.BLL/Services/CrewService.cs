@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Airline.BLL.DTO;
 using Airline.BLL.Interfaces;
 using Airline.DAL.Entities;
@@ -20,7 +21,9 @@ namespace Airline.BLL.Services
 
         public IEnumerable<CrewDto> GetCrews()
         {
-            throw new System.NotImplementedException();
+            var crews = Database.Crews.GetAll();
+            var crewDtos = Mapper.Map<IEnumerable<Crew>, IEnumerable<CrewDto>>(crews);
+            return crewDtos;
         }
 
         public CrewDto GetCrew(object key)
@@ -52,19 +55,17 @@ namespace Airline.BLL.Services
             return crewCompostionDto;
         }
 
-        public CrewDto CreateEmptyCrewWithComposition(CrewDto crewDto)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void CreateFullCrew(CrewDto crewDto)
-        {
-            throw new System.NotImplementedException();
-        }
-
         public void CreateCrew(CrewDto crewDto)
         {
-            throw new System.NotImplementedException();
+            if (crewDto == null)
+                throw new ArgumentException("Crew's object was not passed");
+
+            var crew = Mapper.Map<CrewDto, Crew>(crewDto);
+            var workers = Database.Workers.Find(x => crewDto.SelectedWorkersId.Contains(x.Id)).ToList();
+            crew.Workers = workers;
+
+            Database.Crews.Create(crew);
+            Database.Save();
         }
 
         public void EditCrew(CrewDto crewDto)
