@@ -8,7 +8,7 @@ using Airline.WEB.Validators;
 
 namespace Airline.WEB.Models
 {
-    public class CrewViewModel
+    public class CreateCrewModel
     {
         public int Id { get; set; }
 

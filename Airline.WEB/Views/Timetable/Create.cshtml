@@ -1,8 +1,135 @@
-﻿
+﻿@model TimetableModel
 @{
     ViewBag.Title = "Create";
 }
 
 <h2>Create</h2>
 
-@ViewBag.Args
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group row">
+        @Html.LabelFor(m => m.FlightId, new { @class = "col-sm-2 col-form-label" })
+        <div class="col">
+            @Html.DropDownListFor(m => m.FlightId, Model.CompositionSelectList, new { @class = "form-control col-sm-10" })
+        </div>
+    </div>
+
+    <div class="form-group row">
+        @Html.LabelFor(m => m.FlightId, new { @class = "col-sm-2 col-form-label progr" })
+        <div class="col">
+            @Html.DropDownList(m => m.FlightParkId, Model.CaptainSelectList, new { @class = "form-control col-sm-10", size = @Model.CaptainSelectList.Count() })
+        </div>
+
+    </div>
+
+    </div>
+
+    <div class="form-group row">
+        <div class="col-sm-2 offset-sm-2">
+            <input type="submit" class="btn btn-success" id="sendData" value="Create crew">
+        </div>
+    </div>
+}
+
+@section Styles{
+    <style>
+        select {
+            overflow-y: auto;
+        }
+    </style>
+}
+
+@section Scripts
+{
+    <script>
+        var path = "@Url.Action("GetComposition")";
+        var crewComposition;
+        var crewCompositionOnPage =
+        {
+                "CaptainAmount": 0,
+                "AirHostessAmount": 0,
+                "AircraftPilotAmount":0,
+                "NavigatorOfficerAmount": 0,
+                "RadioOperatorAmount": 0
+            }
+
+        $('#sendData').click(function () {
+            for (var prop in crewCompositionOnPage) {
+                if (crewComposition[prop] != crewCompositionOnPage[prop]) {
+                    alert("Сurrent composition does not match the required!");
+                    return false;
+                }
+            }
+        });
+
+        $('#CrewCompositionId').change(function() {
+            var crewCompositionId = this.value;
+            var da = { "id": crewCompositionId };
+
+            $.ajax({
+                dataType: "json",
+                url: path,
+                data: da,
+                success: function (e) {
+                    crewComposition = e;
+                    var labels = $('.progr');
+                    AppendStatusToLabel(labels);
+                }
+            });
+
+
+
+        }).trigger("change");
+
+        $('option').mousedown(function(e) {
+            e.preventDefault();
+            $(this).prop('selected', !$(this).prop('selected'));
+
+            var selectElement = $(this).parent();
+            var labl = $('.progr').filter(function() {
+                return $(this).prop('for') === selectElement.prop('id');
+            });
+
+            AppendStatusToLabel(labl);
+
+            return false;
+        });
+
+        function AppendStatusToLabel(labels) {
+            for (var i = 0; i < labels.length; i++) {
+                var label = $(labels[i]);
+                var forLabel = label.prop("for").toUpperCase();
+                var select = $("#" + label.prop("for"));
+
+                var numberSelected = select.find(':selected').length;
+
+                var message;
+                if (forLabel.includes("CAPTAIN")) {
+                    crewCompositionOnPage.CaptainAmount = numberSelected;
+                    message = numberSelected + '/' + crewComposition.CaptainAmount;
+                }
+                else if (forLabel.includes("HOSTESS")) {
+                    crewCompositionOnPage.AirHostessAmount = numberSelected;
+                    message = numberSelected + '/' + crewComposition.AirHostessAmount;
+                }
+                else if (forLabel.includes("PILOT")) {
+                    crewCompositionOnPage.AircraftPilotAmount = numberSelected;
+                    message = numberSelected + '/' + crewComposition.AircraftPilotAmount;
+                }
+                else if (forLabel.includes("NAVIGATOR")) {
+                    crewCompositionOnPage.NavigatorOfficerAmount = numberSelected;
+                    message = numberSelected + '/' + crewComposition.NavigatorOfficerAmount;
+                }
+                else if (forLabel.includes("RADIO")) {
+                    crewCompositionOnPage.RadioOperatorAmount = numberSelected;
+                    message = numberSelected + '/' + crewComposition.RadioOperatorAmount;
+                }
+
+                label.children().remove();
+                label.append("<div class='info'>" + message + " selected </div>");
+            }
+        }
+    </script>
+}

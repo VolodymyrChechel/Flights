@@ -13,6 +13,9 @@ namespace Airline.DAL.Entities
 
         public int? PlaneId { get; set; } 
         public Plane Plane { get; set; }
-        
+
+        public int? CrewCompositionId { get; set; }
+        public CrewComposition CrewComposition { get; set; }
+
     }
 }

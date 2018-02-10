@@ -34,8 +34,12 @@ namespace Airline.BLL.Services
 
         public IEnumerable<WorkerDto> GetWorkersByCrewmanType(CrewmanType type, bool isVacant)
         {
-            var workers = Database.Workers.Find(w => w.CrewmanType == type && w.Crews == null);
-            
+            Func<Worker, bool> predicate = w => w.CrewmanType == type;
+
+            if(isVacant)
+                predicate = w => w.CrewmanType == type && w.Crews == null;
+
+            var workers = Database.Workers.Find(predicate);
             var workerDtos = Mapper.Map<IEnumerable<Worker>, IEnumerable<WorkerDto>>(workers);
             return workerDtos;
         }

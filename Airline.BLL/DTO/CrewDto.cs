@@ -16,6 +16,7 @@ namespace Airline.BLL.DTO
         public int CrewCompositionId { get; set; }
 
         public IEnumerable<int> SelectedWorkersId { get; set; }
+        public string WorkersDescription { get; set; }
 
     }
 }

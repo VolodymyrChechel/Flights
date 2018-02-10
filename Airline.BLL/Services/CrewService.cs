@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using Airline.BLL.DTO;
 using Airline.BLL.Interfaces;
@@ -21,8 +22,31 @@ namespace Airline.BLL.Services
 
         public IEnumerable<CrewDto> GetCrews()
         {
-            var crews = Database.Crews.GetAll();
-            var crewDtos = Mapper.Map<IEnumerable<Crew>, IEnumerable<CrewDto>>(crews);
+            var crews = Database.Crews.GetAll().Include(c => c.Workers);
+            //var crewDtos = Mapper.Map<IEnumerable<Crew>, IEnumerable<CrewDto>>(crews);
+            var crewDtos = new List<CrewDto>();
+
+            foreach (var crew in crews)
+            {
+            string workerSummary = "";
+                var workers = crew.Workers;
+                foreach (var worker in workers)
+                {
+                    workerSummary += worker.Name + " " + worker.Surname + " ";
+                }
+
+                crewDtos.Add(new CrewDto
+                {
+                    Id = crew.Id,CrewCompositionId = crew.CrewCompositionId,
+                    WorkersDescription = workerSummary
+                });
+                //foreach (var VARIABLE in COLLECTION)
+                //{
+                    
+                //}
+
+
+            }
             return crewDtos;
         }
 

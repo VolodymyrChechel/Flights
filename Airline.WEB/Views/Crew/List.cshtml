@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CrewViewModel>
+﻿@model IEnumerable<ShowCrewModel>
 @{
     ViewBag.Title = "List of crews";
 }
@@ -14,20 +14,16 @@
     <thead class="thead-dark">
         <tr>
             <th>Id</th>
-            <th> Planned departure time</th>
-            <th> Planned Flight</th>
-            <th> From </th>
-            <th> To </th>
+            <th> Crew compostion id</th>
+            <th> Workers </th>
         </tr>
     </thead>
     @foreach (var item in @Model)
     {
         <tr class="clickable-row" data-href="@Url.Action("Edit", "Flight", new {id=item.Id})">
-            <td>@item.id</td>
-            <td>@item.</td>
-            <td>@item.PlannedFlightTime</td>
-            <td>@item.FromIATA (@item.FromName)</td>
-            <td>@item.ToIATA (@item.ToName)</td>
+            <td>@item.Id</td>
+            <td>@item.CrewCompositionId</td>
+            <td>@item.WorkersDescription</td>
         </tr>
     }
 </table>

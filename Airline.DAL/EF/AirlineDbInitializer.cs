@@ -71,13 +71,7 @@ namespace Airline.DAL.EF
             var airbus = db.Planes.Add(new Plane() { Name = "Airbus А330-200", Capacity = 240, Velocity = 900 });
             var sukhoi = db.Planes.Add(new Plane() { Name = "Sukhoi SuperJet 100", Capacity = 85, Velocity = 840 });
 
-            db.FlightParks.Add(new FlightPark() {Name = "Korolev", Plane = boeing});
-            db.FlightParks.Add(new FlightPark() {Name = "Sikorsky", Plane = airbus});
-            db.FlightParks.Add(new FlightPark() {Name = "Antonov", Plane = sukhoi});
-            db.FlightParks.Add(new FlightPark() {Name = "Paton", Plane = sukhoi});
-            db.FlightParks.Add(new FlightPark() {Name = "Glushko ", Plane = sukhoi});
-
-            db.CrewCompositions.Add(new CrewComposition
+            var crew1 = db.CrewCompositions.Add(new CrewComposition
             {
                 AircraftPilotAmount = 2,
                 AirHostessAmount = 5,
@@ -85,7 +79,7 @@ namespace Airline.DAL.EF
                 NavigatorOfficerAmount = 1,
                 RadioOperatorAmount = 1
             });
-            db.CrewCompositions.Add(new CrewComposition
+            var crew2 = db.CrewCompositions.Add(new CrewComposition
             {
                 AircraftPilotAmount = 3,
                 AirHostessAmount = 7,
@@ -93,6 +87,12 @@ namespace Airline.DAL.EF
                 NavigatorOfficerAmount = 1,
                 RadioOperatorAmount = 1
             });
+
+            db.FlightParks.Add(new FlightPark() {Name = "Korolev", Plane = boeing, CrewComposition = crew2});
+            db.FlightParks.Add(new FlightPark() {Name = "Sikorsky", Plane = airbus, CrewComposition = crew2});
+            db.FlightParks.Add(new FlightPark() {Name = "Antonov", Plane = sukhoi, CrewComposition = crew1 });
+            db.FlightParks.Add(new FlightPark() {Name = "Paton", Plane = sukhoi, CrewComposition = crew1 });
+            db.FlightParks.Add(new FlightPark() {Name = "Glushko ", Plane = sukhoi, CrewComposition = crew1 });
 
             db.SaveChanges();
         }

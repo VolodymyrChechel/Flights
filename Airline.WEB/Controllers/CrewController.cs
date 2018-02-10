@@ -14,6 +14,9 @@ using AutoMapper;
 
 namespace Airline.WEB.Controllers
 {
+    /// <summary>
+    /// Controller for creating new crews
+    /// </summary>
     public class CrewController : Controller
     {
         private ICrewService _service;
@@ -29,7 +32,7 @@ namespace Airline.WEB.Controllers
         public ActionResult List()
         {
             var crewDtos = _service.GetCrews();
-            var crews = Mapper.Map<IEnumerable<CrewDto>, IEnumerable<CrewViewModel>>(crewDtos);
+            var crews = Mapper.Map<IEnumerable<CrewDto>, IEnumerable<ShowCrewModel>>(crewDtos);
 
             return View(crews);
         }
@@ -37,14 +40,14 @@ namespace Airline.WEB.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            var model = new CrewViewModel();
+            var model = new CreateCrewModel();
             FillCrewModel(model);
 
             return View(model);
         }
 
         [HttpPost]
-        public ActionResult Create(CrewViewModel model)
+        public ActionResult Create(CreateCrewModel model)
         {
             var compostion = _service.GetCrewComposition(model.CrewCompositionId);
 
@@ -56,7 +59,7 @@ namespace Airline.WEB.Controllers
             {
                 try
                 {
-                    var crewDto = Mapper.Map<CrewViewModel, CrewDto>(model);
+                    var crewDto = Mapper.Map<CreateCrewModel, CrewDto>(model);
                     _service.CreateCrew(crewDto);
 
                     TempData["Message"] = $"New crew was created succesfully";
@@ -76,7 +79,7 @@ namespace Airline.WEB.Controllers
             return Json(compostion, JsonRequestBehavior.AllowGet);
         }
 
-        private void FillCrewModel(CrewViewModel model)
+        private void FillCrewModel(CreateCrewModel model)
         {
             var compositions = _service.GetCrewCompositions();
             var hostess = _workerService.GetWorkersByCrewmanType(CrewmanType.AirHostess, true);

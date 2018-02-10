@@ -24,12 +24,12 @@ namespace Airline.WEB.Util
 
             CreateMap<LoginModel, UserDto>();
 
-            CreateMap<CrewViewModel, CrewDto>().AfterMap((s, d) =>
+            CreateMap<CreateCrewModel, CrewDto>().AfterMap((s, d) =>
             {
                 d.SelectedWorkersId = s.SelectedAircraftPilots.Concat(s.SelectedCaptains).Concat(s.SelectedHostess)
                     .Concat(s.SelectedRadioOperators).Concat(s.SelectedNavigatorOfficers).ToList();
             });
-            CreateMap<CrewDto, CrewViewModel>();
+            CreateMap<CrewDto, ShowCrewModel>();
         }
     }
 }
