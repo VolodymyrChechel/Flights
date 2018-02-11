@@ -41,25 +41,31 @@ namespace Airline.BLL.Services
             return parkDto;
         }
 
-        public void GetLastFlightDataForCrew(object key, out DateTime date, out string airportId)
+        public void GetLastFlightDataForFlightPark(object key, out DateTime date, out string airportId)
         {
             if (key == null)
                 throw new ArgumentException("Flight park's id was not set");
 
-            var crew = Database.FlightParks.GetAll().Where(x => x.Id == (int)key).Include(x => x.)
+            var flightPark = Database.FlightParks.GetAll().Where(x => x.Id == (int)key).Include(x => x.Timetables)
                 .FirstOrDefault();
 
-            if (crew == null)
-                throw new ArgumentException("Crew was not found");
+            if (flightPark == null)
+                throw new ArgumentException("Flight park was not found");
 
-            var lastTimeTable = crew.TimeTables.OrderByDescending(x => x.DateTime).First();
-            airportId = Database.Flights.Get(lastTimeTable.FlightId).ToIATA;
+            airportId = "";
+            date = DateTime.UtcNow;
+            try
+            {
+                var lastTimeTable = flightPark.Timetables.OrderByDescending(x => x.DateTime).First();
+                airportId = Database.Flights.Get(lastTimeTable.FlightId).ToIATA;
 
-            var crewDateTime = lastTimeTable.DateTime.AddDays(1);
-            date = DateTime.UtcNow.AddDays(1);
+                var crewDateTime = lastTimeTable.DateTime.AddDays(1);
+                date = DateTime.UtcNow.AddDays(1);
 
-            if (crewDateTime > date)
-                date = crewDateTime;
+                if (crewDateTime > date)
+                    date = crewDateTime;
+            }
+            catch { }
         }
     }
 }

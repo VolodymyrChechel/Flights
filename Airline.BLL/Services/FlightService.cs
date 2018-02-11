@@ -51,7 +51,10 @@ namespace Airline.BLL.Services
         {
             if (flightDto == null)
                 throw new ArgumentException("Flight's object was not passed");
-            
+
+            if(Database.Flights.Get(flightDto.Id) != null)
+                throw new ArgumentException("Flight with this ID is already exist");
+                
             var flight = Mapper.Map<FlightDto, Flight>(flightDto);
 
             Database.Flights.Create(flight);

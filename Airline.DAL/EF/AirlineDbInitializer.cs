@@ -23,6 +23,13 @@ namespace Airline.DAL.EF
             db.Airports.Add(new Airport() {IATA = "LWO", City = "Lviv", Name = "Lviv Danylo Halytskyi International Airport" });
             db.Airports.Add(new Airport() {IATA = "ODS", City = "Odessa", Name = "Odessa International Airport" });
 
+            db.Flights.Add(new Flight {Id="KH007", FromIATA = "KBP", ToIATA = "HRK", PlannedDepartureTime = new TimeSpan(1,0,0), PlannedFlightTime = new TimeSpan(1,30,0)});
+            db.Flights.Add(new Flight {Id="KH008", FromIATA = "KBP", ToIATA = "HRK", PlannedDepartureTime = new TimeSpan(10,0,0), PlannedFlightTime = new TimeSpan(1,30,0)});
+            db.Flights.Add(new Flight {Id="KD019", FromIATA = "KBP", ToIATA = "DNK", PlannedDepartureTime = new TimeSpan(5,0,0), PlannedFlightTime = new TimeSpan(2,36,0)});
+            db.Flights.Add(new Flight {Id="KD018", FromIATA = "DNK", ToIATA = "HRK", PlannedDepartureTime = new TimeSpan(15,45,0), PlannedFlightTime = new TimeSpan(2,36,0)});
+            db.Flights.Add(new Flight {Id="LD345", FromIATA = "LWO", ToIATA = "DNK", PlannedDepartureTime = new TimeSpan(16,50,0), PlannedFlightTime = new TimeSpan(3,15,0)});
+            db.Flights.Add(new Flight {Id="LD355", FromIATA = "DNK", ToIATA = "LWO", PlannedDepartureTime = new TimeSpan(3,30,0), PlannedFlightTime = new TimeSpan(3,15,0)});
+
             db.Workers.Add(new Worker() { Name = "Bohdan", Surname = "Shulyayev", BirthDate = DateTime.Parse("1963-3-18"), PhoneNumber = "+380931852367", CrewmanType = CrewmanType.Captain });
             db.Workers.Add(new Worker() { Name = "Roman", Surname = "Shchors", BirthDate = DateTime.Parse("1969-5-28"), PhoneNumber = "+380503925682", CrewmanType = CrewmanType.Captain });
             db.Workers.Add(new Worker() { Name = "Serhii", Surname = "Savaryn", BirthDate = DateTime.Parse("1961-9-6"), PhoneNumber = "+380939939184", CrewmanType = CrewmanType.Captain });

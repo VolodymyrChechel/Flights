@@ -138,9 +138,10 @@ namespace Airline.WEB.Controllers
 
             var crews = _crewService.GetCrews();
 
-            DateTime lastFlight;
-            string airportTo;
-           _crewService.GetLastFlightDataForCrew(1,out lastFlight, out airportTo);
+            DateTime lastFlight1, lastFlight2;
+            string airportTo1, airportTo2;
+           _crewService.GetLastFlightDataForCrew(1,out lastFlight1, out airportTo1);
+           _flightParkService.GetLastFlightDataForFlightPark(1,out lastFlight2, out airportTo2);
             // when there are no crews this timetable will be with attention status
             if (crews.Count() != 0)
                 model.CrewSelectListItems = UtilMethods.CreateListOfSelectItems(crews, c => c.Id.ToString(), c => c.WorkersDescription);

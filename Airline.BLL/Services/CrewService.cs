@@ -90,14 +90,20 @@ namespace Airline.BLL.Services
             if (crew == null)
                 throw new ArgumentException("Crew was not found");
 
-            var lastTimeTable = crew.TimeTables.OrderByDescending(x => x.DateTime).First();
-            airportId = Database.Flights.Get(lastTimeTable.FlightId).ToIATA;
+            airportId = "";
+            date = DateTime.UtcNow;
+            try
+            {
+                var lastTimeTable = crew.TimeTables.OrderByDescending(x => x.DateTime).First();
+                airportId = Database.Flights.Get(lastTimeTable.FlightId).ToIATA;
 
-            var crewDateTime = lastTimeTable.DateTime.AddDays(1);
-            date = DateTime.UtcNow.AddDays(1);
+                var crewDateTime = lastTimeTable.DateTime.AddDays(1);
+                date = DateTime.UtcNow.AddDays(1);
 
-            if (crewDateTime > date)
-                date = crewDateTime;
+                if (crewDateTime > date)
+                    date = crewDateTime;
+            }
+            catch { }
         }
 
         public CrewCompostionDto GetCrewComposition(object key)

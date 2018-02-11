@@ -16,8 +16,8 @@ namespace Airline.DAL.Entities
 
         public int? CrewCompositionId { get; set; }
         public CrewComposition CrewComposition { get; set; }
-
-        public ICollection<Flight> Flights { get; set; }
+        
+        public ICollection<Timetable> Timetables { get; set; }
 
     }
 }
