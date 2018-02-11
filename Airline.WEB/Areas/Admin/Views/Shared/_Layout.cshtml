@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    @RenderSection("Styles", required: false)
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+    <a class="navbar-brand" href="@Url.Action("List", "Worker")">Airline - ADMIN PAGE</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("List", "Worker")">
+                    <span class="fa fa-address-card"></span> WORKER
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("List", "Flight")">
+                    <span class="fa fa-plane"></span> FLIGHT
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("List", "Crew")">
+                    <span class="fa fa-users"></span> CREW
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("List", "Timetable")">
+                    <span class="fa fa-calendar"></span> TIMETABLE
+                </a>
+            </li>
+        </ul>
+
+        <ul class="navbar-nav ml-auto">
+            @if (!User.Identity.IsAuthenticated)
+            {
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Login", "Account")">
+                        <span class="fa fa-sign-in"></span> Log in
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Register", "Account")">Register</a>
+                </li>
+            }
+            else
+            {
+                <li class="nav-item">
+                    <a class="nav-link disabled"> You are logged in as @User.Identity.Name
+                        - @Roles.GetRolesForUser(User.Identity.Name).Length </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Logout", "Account")">
+                        <span class="fa fa-sign-out"></span> Log out
+                    </a>
+                </li>
+            }
+        </ul>
+    </div>
+    </div>
+</nav>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    @RenderSection("Scripts", required: false)
+
+</body>
+</html>

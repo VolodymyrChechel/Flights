@@ -1,0 +1,105 @@
+﻿@model WorkerViewModel
+@{
+    ViewBag.Title = "Create worker";
+}
+
+<link href="~/Content/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
+
+<div class="row">
+    <div class="header col-12">
+        <h3 class="float-left">@Html.ActionLink("List of workers", "List") / @ViewBag.Title</h3>
+    </div>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(w => w.Id)
+
+
+    <div class="form-group row">
+        @Html.LabelFor(w => w.Name, new { @class = "col-sm-2 col-form-label" })
+        <div class="col-sm-10">
+            @Html.EditorFor(w => w.Name, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+    <div class="form-group row">
+        @Html.LabelFor(w => w.Surname, new { @class = "col-form-label col-sm-2" })
+        <div class="col-sm-10">
+            @Html.EditorFor(w => w.Surname, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group row">
+        @Html.LabelFor(w => w.BirthDate, new { @class = "col-form-label col-sm-2" })
+        <div class="col-sm-10">
+            @Html.TextBoxFor(w => w.BirthDate, new
+       {
+           id = "datepicker",
+           @class = "form-control datepicker",
+           @Value = Model.BirthDate.ToShortDateString()
+       })
+        </div>
+    </div>
+    <div class="form-group row">
+        @Html.LabelFor(w => w.PhoneNumber, new { @class = "col-form-label col-sm-2" })
+        <div class="col-sm-10">
+            @Html.EditorFor(w => w.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+    <div class="form-group row">
+        @Html.LabelFor(w => w.CrewmanType, new { @class = "col-form-label col-sm-2" })
+        <div class="col-sm-10">
+            @Html.EnumDropDownListFor(w => w.CrewmanType, "Choose crewman type", new { @class = "custom-select form-control" })
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-sm-2 offset-md-2">
+            <input type="submit" class="btn btn-success" value="Save changes">
+        </div>
+    </div>
+}
+
+@section Scripts{
+    <script src="~/Scripts/bootstrap-datepicker.min.js"></script>
+
+    <script>
+        $(function () {
+            $('#datepicker').datepicker();
+        });
+
+    (function ($) {
+        $.validator.addMethod('rangeDate',
+            function (value, element, param) {
+                if (!value) {
+                    return true;
+                }
+                try {
+                    var dateValue = new Date(value);
+                }
+                catch (e) {
+                    return false;
+                }
+                var res = param.min <= dateValue && dateValue <= param.max;
+                return res;
+            });
+
+        // The adapter to support ASP.NET MVC unobtrusive validation
+        $.validator.unobtrusive.adapters.add('rangedate', ['min', 'max'],
+            function (options) {
+                var params = {
+                    min: new Date(options.params.min),
+                    max: new Date(options.params.max)
+                };
+
+                options.rules['rangeDate'] = params;
+                if (options.message) {
+                    options.messages['rangeDate'] = options.message;
+                }
+            });
+    }(jQuery));
+
+    </script>
+}

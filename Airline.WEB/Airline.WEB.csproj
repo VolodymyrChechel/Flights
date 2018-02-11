@@ -184,6 +184,12 @@
     <Content Include="Content\bootstrap-datepicker.css.map" />
     <Content Include="Areas\Admin\Views\Timetable\List.cshtml" />
     <Content Include="Areas\Admin\Views\Timetable\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Worker\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Worker\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Worker\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Worker\List.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
@@ -319,6 +325,7 @@
     <Compile Include="App_Start\TimeSpanValueProviderFactory.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\TimetableController.cs" />
+    <Compile Include="Areas\Admin\Controllers\WorkerController.cs" />
     <Compile Include="Areas\Dispatcher\DispatcherAreaRegistration.cs" />
     <Compile Include="Binders\TimeSpanBinder.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -397,7 +404,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Areas\Dispatcher\Controllers\" />
     <Folder Include="Areas\Dispatcher\Models\" />
     <Folder Include="Areas\Dispatcher\Views\Shared\" />

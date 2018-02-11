@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
 using Airline.BLL.DTO;
 using Airline.BLL.Interfaces;
 using Airline.DAL.Entities;
@@ -37,6 +39,27 @@ namespace Airline.BLL.Services
             var parkDto = Mapper.Map<FlightPark, FlightParkDto>(park);
 
             return parkDto;
+        }
+
+        public void GetLastFlightDataForCrew(object key, out DateTime date, out string airportId)
+        {
+            if (key == null)
+                throw new ArgumentException("Flight park's id was not set");
+
+            var crew = Database.FlightParks.GetAll().Where(x => x.Id == (int)key).Include(x => x.)
+                .FirstOrDefault();
+
+            if (crew == null)
+                throw new ArgumentException("Crew was not found");
+
+            var lastTimeTable = crew.TimeTables.OrderByDescending(x => x.DateTime).First();
+            airportId = Database.Flights.Get(lastTimeTable.FlightId).ToIATA;
+
+            var crewDateTime = lastTimeTable.DateTime.AddDays(1);
+            date = DateTime.UtcNow.AddDays(1);
+
+            if (crewDateTime > date)
+                date = crewDateTime;
         }
     }
 }
