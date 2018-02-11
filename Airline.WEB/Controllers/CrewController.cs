@@ -73,6 +73,41 @@ namespace Airline.WEB.Controllers
             return RedirectToAction("List");
         }
 
+        [HttpGet]
+        public ActionResult Delete(int? id)
+        {
+            try
+            {
+                var crewDto = _service.GetCrew(id);
+                var crew = Mapper.Map<CrewDto, ShowCrewModel>(crewDto);
+
+                return View(crew);
+            }
+            catch (ArgumentException e)
+            {
+                TempData["Message"] = e.Message;
+                return RedirectToAction("List");
+            }
+        }
+
+        [HttpPost]
+        [ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            try
+            {
+                _service.DeleteCrew(id);
+                TempData["Message"] = $"Crew {id} was deleted";
+            }
+            catch (ArgumentException e)
+            {
+                TempData["Message"] = e.Message;
+            }
+
+            return RedirectToAction("List");
+        }
+
         public JsonResult GetComposition(int id)
         {
             var compostion = _service.GetCrewComposition(id);

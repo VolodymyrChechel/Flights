@@ -43,6 +43,7 @@ namespace Airline.WEB.Util
             });
 
             CreateMap<TimetableDto, TimetableModel>();
+            CreateMap<TimetableDto, TimetableCreateModel>();
             CreateMap<TimetableModel, TimetableDto>();
         }
     }

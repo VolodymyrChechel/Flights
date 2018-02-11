@@ -386,6 +386,7 @@
     <Content Include="Views\Timetable\Create.cshtml" />
     <Content Include="Views\Home\Error.cshtml" />
     <Content Include="Views\Timetable\Edit.cshtml" />
+    <Content Include="Views\Crew\Delete.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

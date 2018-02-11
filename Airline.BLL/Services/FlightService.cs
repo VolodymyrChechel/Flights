@@ -74,6 +74,12 @@ namespace Airline.BLL.Services
             if (key == null)
                 throw new ArgumentException("Flight's id was not set");
 
+            var hasTimetable = Database.Flights.GetAll().Include(x => x.Timetables).
+                Any(x => x.Timetables.Count > 0 && x.Id == (string)key);
+
+            if (hasTimetable)
+                throw new ArgumentException("Removal is forbidden. Flight is in timetables");
+
             Database.Flights.Delete(key);
             Database.Save();
         }

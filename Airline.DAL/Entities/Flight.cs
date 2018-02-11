@@ -19,5 +19,7 @@ namespace Airline.DAL.Entities
         public Airport From { get; set; }
         public string ToIATA { get; set; }
         public Airport To { get; set; }
+
+        public ICollection<Timetable> Timetables { get; set; }
     }
 }

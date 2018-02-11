@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using Airline.BLL.DTO;
 using Airline.BLL.Infrastructure;
@@ -9,6 +10,7 @@ using Airline.Common.Enums;
 using Airline.DAL.Entities;
 using Airline.DAL.Interfaces;
 using AutoMapper;
+using Castle.Core.Internal;
 
 namespace Airline.BLL.Services
 {
@@ -74,7 +76,6 @@ namespace Airline.BLL.Services
         {
             if (workerDto == null)
                 throw new ArgumentException("Worker's object was not passed");
-
             var worker = Mapper.Map<WorkerDto, Worker>(workerDto);
 
             Database.Workers.Update(worker);
@@ -85,6 +86,12 @@ namespace Airline.BLL.Services
         {
             if (key == null)
                 throw new ArgumentException("Worker's id was not set");
+
+            var hasCrew = Database.Workers.GetAll().Include(x => x.Crews).
+                Any(x => x.Crews.Count > 0 && x.Id == (int)key);
+
+            if (hasCrew)
+                throw new ArgumentException("Removal is forbidden. Worker is in crew");
 
             Database.Workers.Delete(key);
             Database.Save();

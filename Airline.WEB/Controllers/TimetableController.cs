@@ -59,8 +59,8 @@ namespace Airline.WEB.Controllers
             catch (Exception e)
             {
                 TempData["Message"] = e.Message;
+                return RedirectToAction("List");
             }
-            RedirectToAction("List");
         }
 
         [HttpPost]
@@ -110,7 +110,7 @@ namespace Airline.WEB.Controllers
                 var crewCompositionOfCrew = _crewService.GetCrew(model.CrewId).CrewCompositionId;
                 var crewCompositionOfFlightPark = _flightParkService.GetFlightPark(model.FlightParkId).CrewCompositionId;
 
-                if (crewCompositionOfCrew == crewCompositionOfFlightPark)
+                if (crewCompositionOfCrew != crewCompositionOfFlightPark)
                     ModelState.AddModelError("FlightParkId",
                         "Selected flight park and selected crew has different compostion");
             }
@@ -133,9 +133,14 @@ namespace Airline.WEB.Controllers
 
         private void FillTimetableCreateModel(TimetableCreateModel model)
         {
-            model.DateTime = DateTime.UtcNow.AddHours(3);
+            //
+            model.DateTime = DateTime.UtcNow.AddHours(4);
 
             var crews = _crewService.GetCrews();
+
+            DateTime lastFlight;
+            string airportTo;
+           _crewService.GetLastFlightDataForCrew(1,out lastFlight, out airportTo);
             // when there are no crews this timetable will be with attention status
             if (crews.Count() != 0)
                 model.CrewSelectListItems = UtilMethods.CreateListOfSelectItems(crews, c => c.Id.ToString(), c => c.WorkersDescription);
@@ -143,8 +148,10 @@ namespace Airline.WEB.Controllers
             var flights = _flightService.GetFlights();
             model.FlightSelectListItems = UtilMethods.CreateListOfSelectItems(flights, f => f.Id,
                 f => $"From {f.FromName}({f.FromIATA}) to {f.ToName}({f.ToIATA}) at {f.PlannedDepartureTime}");
+
+
             model.FlightParkSelectListItems = UtilMethods.CreateListOfSelectItems(_flightParkService.GetFlightParks(), f => f.Id.ToString(),
-                f => $"Plane {f.Id}. {f.Name}");
+                f => $"Plane - {f.Id}. {f.Name}, Crew composition - {f.CrewCompositionId}");
         }
     }
 }
