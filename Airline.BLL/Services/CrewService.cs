@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Globalization;
 using System.Linq;
 using Airline.BLL.DTO;
 using Airline.BLL.Interfaces;
@@ -27,12 +28,15 @@ namespace Airline.BLL.Services
 
             foreach (var crew in crews)
             {
-                string workerSummary = $"{crew.Id}. Crew composition - {crew.CrewCompositionId}, Workers: ";
-                var workers = crew.Workers;
-                foreach (var worker in workers)
-                {
-                    workerSummary += worker.Surname + " ";
-                }
+                string lastDate = GetLastFlightDateForCrew(crew.Id).ToString("hh:mm:ss tt");
+                string lastAirport = GetLastFlightAirportForCrew(crew.Id);
+                string workerSummary = $"{crew.Id}. Crew composition - {crew.CrewCompositionId}, "+
+                    $"Date from available: {lastDate}, Last airport: {lastAirport}";
+                //var workers = crew.Workers;
+                //foreach (var worker in workers)
+                //{
+                //    workerSummary += worker.Surname + " ";
+                //}
 
                 crewDtos.Add(new CrewDto
                 {
@@ -104,6 +108,51 @@ namespace Airline.BLL.Services
                     date = crewDateTime;
             }
             catch { }
+        }
+
+        public DateTime GetLastFlightDateForCrew(object key)
+        {
+            if (key == null)
+                throw new ArgumentException("Crew's id was not set");
+
+            var crew = Database.Crews.GetAll().Where(x => x.Id == (int)key).Include(x => x.TimeTables)
+                .FirstOrDefault();
+
+            if (crew == null)
+                throw new ArgumentException("Crew was not found");
+
+            var date = DateTime.UtcNow;
+
+            var lastTimeTable = crew.TimeTables.OrderByDescending(x => x.DateTime).FirstOrDefault();
+
+            if (lastTimeTable != default(Timetable))
+            {
+                var crewDateTime = lastTimeTable.DateTime.AddDays(1);
+                date = DateTime.UtcNow.AddDays(1);
+
+                if (crewDateTime > date)
+                    date = crewDateTime;
+            }
+            
+            return date;
+        }
+
+        public string GetLastFlightAirportForCrew(object key)
+        {
+            if (key == null)
+                throw new ArgumentException("Crew's id was not set");
+
+            var crew = Database.Crews.GetAll().Where(x => x.Id == (int)key).Include(x => x.TimeTables)
+                .FirstOrDefault();
+
+            if (crew == null)
+                throw new ArgumentException("Crew was not found");
+
+            var date = DateTime.UtcNow;
+
+            var lastTimeTable = crew.TimeTables.OrderByDescending(x => x.DateTime).FirstOrDefault();
+
+            return lastTimeTable != default(Timetable) ? Database.Flights.Get(lastTimeTable.FlightId).ToIATA : "KBP";
         }
 
         public CrewCompostionDto GetCrewComposition(object key)

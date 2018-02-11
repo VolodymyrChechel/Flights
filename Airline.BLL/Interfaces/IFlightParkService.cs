@@ -17,5 +17,7 @@ namespace Airline.BLL.Interfaces
         /// Allow get data of plane accessibility (date and airport)
         /// </summary>
         void GetLastFlightDataForFlightPark(object key, out DateTime date, out string airportId);
+        DateTime GetLastFlightDateForFlightPark(object key);
+        string GetLastAiportForFlightPark(object key);
     }
 }

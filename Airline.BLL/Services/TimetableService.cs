@@ -27,7 +27,7 @@ namespace Airline.BLL.Services
 
         public IEnumerable<TimetableDto> GetTimetables()
         {
-            var timetables = Database.Timetables.GetAll().Include(x => x.Flight);
+            var timetables = Database.Timetables.GetAll().Include(x => x.Flight.From).Include(x => x.Flight.To);
 
             var timetableDtos = Mapper.Map<IEnumerable<Timetable>, IEnumerable<TimetableDto>>(timetables);
             return timetableDtos;

@@ -114,6 +114,20 @@ namespace Airline.WEB.Controllers
                     ModelState.AddModelError("FlightParkId",
                         "Selected flight park and selected crew has different compostion");
             }
+            
+             DateTime lastDateForCrew, lastDateForFlightPark;
+             string lastAirportForCrew, lastAirportForFlightPark;
+
+            lastDateForCrew = _crewService.GetLastFlightDateForCrew(model.CrewId);
+            lastDateForFlightPark = _flightParkService.GetLastFlightDateForFlightPark(model.FlightParkId);
+            lastAirportForCrew = _crewService.GetLastFlightAirportForCrew(model.CrewId);
+            lastAirportForFlightPark = _flightParkService.GetLastAiportForFlightPark(model.FlightParkId);
+
+            if(lastAirportForFlightPark != lastAirportForCrew || lastAirportForFlightPark != model.FlightId)
+                ModelState.AddModelError("FlightId", "Please, check airport data in crew or flight park. They must be equal");
+
+            if(model.DateTime < lastDateForCrew || model.DateTime < lastDateForFlightPark)
+                ModelState.AddModelError("DateTime", "Chosen data too early. Check suiatable in crew or flight park fields");
 
             if (model.DateTime < DateTime.UtcNow.AddHours(3))
                 ModelState.AddModelError("DateTime", "It's too late create timetable for this time");
@@ -130,19 +144,12 @@ namespace Airline.WEB.Controllers
             return View(model);
         }
 
-
+        // method for filling inputs data
         private void FillTimetableCreateModel(TimetableCreateModel model)
         {
-            //
             model.DateTime = DateTime.UtcNow.AddHours(4);
 
             var crews = _crewService.GetCrews();
-
-            DateTime lastFlight1, lastFlight2;
-            string airportTo1, airportTo2;
-           _crewService.GetLastFlightDataForCrew(1,out lastFlight1, out airportTo1);
-           _flightParkService.GetLastFlightDataForFlightPark(1,out lastFlight2, out airportTo2);
-            // when there are no crews this timetable will be with attention status
             if (crews.Count() != 0)
                 model.CrewSelectListItems = UtilMethods.CreateListOfSelectItems(crews, c => c.Id.ToString(), c => c.WorkersDescription);
 
@@ -150,9 +157,8 @@ namespace Airline.WEB.Controllers
             model.FlightSelectListItems = UtilMethods.CreateListOfSelectItems(flights, f => f.Id,
                 f => $"From {f.FromName}({f.FromIATA}) to {f.ToName}({f.ToIATA}) at {f.PlannedDepartureTime}");
 
-
             model.FlightParkSelectListItems = UtilMethods.CreateListOfSelectItems(_flightParkService.GetFlightParks(), f => f.Id.ToString(),
-                f => $"Plane - {f.Id}. {f.Name}, Crew composition - {f.CrewCompositionId}");
+                f => f.Summary);
         }
     }
 }

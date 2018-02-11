@@ -14,6 +14,8 @@ namespace Airline.BLL.Interfaces
         /// Allow get data of plane accessibility (date and airport)
         /// </summary>
         void GetLastFlightDataForCrew(object key, out DateTime date, out string airportId);
+        DateTime GetLastFlightDateForCrew(object key);
+        string GetLastFlightAirportForCrew(object key);
         CrewCompostionDto GetCrewComposition(object key);
         void CreateCrew(CrewDto crewDto);
         void EditCrew(CrewDto crewDto);
