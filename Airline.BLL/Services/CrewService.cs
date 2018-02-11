@@ -28,7 +28,7 @@ namespace Airline.BLL.Services
 
             foreach (var crew in crews)
             {
-                string lastDate = GetLastFlightDateForCrew(crew.Id).ToString("hh:mm:ss tt");
+                string lastDate = GetLastFlightDateForCrew(crew.Id).ToString("MM/dd/yyyy hh:mm:ss tt");
                 string lastAirport = GetLastFlightAirportForCrew(crew.Id);
                 string workerSummary = $"{crew.Id}. Crew composition - {crew.CrewCompositionId}, "+
                     $"Date from available: {lastDate}, Last airport: {lastAirport}";

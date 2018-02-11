@@ -10,7 +10,7 @@ using Airline.WEB.Models;
 using Airline.WEB.Util;
 using AutoMapper;
 
-namespace Airline.WEB.Controllers
+namespace Airline.WEB.Areas.Admin.Controllers
 {
     public class FlightController : Controller
     {

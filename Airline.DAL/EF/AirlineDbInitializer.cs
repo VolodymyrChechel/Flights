@@ -22,9 +22,13 @@ namespace Airline.DAL.EF
             db.Airports.Add(new Airport() {IATA = "KWG", City = "Kryvyi Rih", Name = "Boryspil International Airport"});
             db.Airports.Add(new Airport() {IATA = "LWO", City = "Lviv", Name = "Lviv Danylo Halytskyi International Airport" });
             db.Airports.Add(new Airport() {IATA = "ODS", City = "Odessa", Name = "Odessa International Airport" });
-
-            db.Flights.Add(new Flight {Id="KH007", FromIATA = "KBP", ToIATA = "HRK", PlannedDepartureTime = new TimeSpan(1,0,0), PlannedFlightTime = new TimeSpan(1,30,0)});
-            db.Flights.Add(new Flight {Id="KH008", FromIATA = "KBP", ToIATA = "HRK", PlannedDepartureTime = new TimeSpan(10,0,0), PlannedFlightTime = new TimeSpan(1,30,0)});
+            
+            db.Flights.Add(new Flight { Id = "KO007", FromIATA = "KBP", ToIATA = "ODS", PlannedDepartureTime = new TimeSpan(1, 0, 0), PlannedFlightTime = new TimeSpan(1, 30, 0) });
+            db.Flights.Add(new Flight { Id = "KO008", FromIATA = "ODS", ToIATA = "KBP", PlannedDepartureTime = new TimeSpan(10, 0, 0), PlannedFlightTime = new TimeSpan(1, 30, 0) });
+            db.Flights.Add(new Flight {Id="KL007", FromIATA = "KBP", ToIATA = "LWO", PlannedDepartureTime = new TimeSpan(1,0,0), PlannedFlightTime = new TimeSpan(1,30,0)});
+            db.Flights.Add(new Flight {Id="KL008", FromIATA = "LWO", ToIATA = "KBP", PlannedDepartureTime = new TimeSpan(10,0,0), PlannedFlightTime = new TimeSpan(1,30,0)});
+            db.Flights.Add(new Flight { Id = "KH007", FromIATA = "KBP", ToIATA = "HRK", PlannedDepartureTime = new TimeSpan(1, 0, 0), PlannedFlightTime = new TimeSpan(1, 30, 0) });
+            db.Flights.Add(new Flight { Id = "KH008", FromIATA = "KBP", ToIATA = "HRK", PlannedDepartureTime = new TimeSpan(10, 0, 0), PlannedFlightTime = new TimeSpan(1, 30, 0) });
             db.Flights.Add(new Flight {Id="KD019", FromIATA = "KBP", ToIATA = "DNK", PlannedDepartureTime = new TimeSpan(5,0,0), PlannedFlightTime = new TimeSpan(2,36,0)});
             db.Flights.Add(new Flight {Id="KD018", FromIATA = "DNK", ToIATA = "HRK", PlannedDepartureTime = new TimeSpan(15,45,0), PlannedFlightTime = new TimeSpan(2,36,0)});
             db.Flights.Add(new Flight {Id="LD345", FromIATA = "LWO", ToIATA = "DNK", PlannedDepartureTime = new TimeSpan(16,50,0), PlannedFlightTime = new TimeSpan(3,15,0)});

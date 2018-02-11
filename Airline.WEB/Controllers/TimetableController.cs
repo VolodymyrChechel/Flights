@@ -123,7 +123,7 @@ namespace Airline.WEB.Controllers
             lastAirportForCrew = _crewService.GetLastFlightAirportForCrew(model.CrewId);
             lastAirportForFlightPark = _flightParkService.GetLastAiportForFlightPark(model.FlightParkId);
 
-            if(lastAirportForFlightPark != lastAirportForCrew || lastAirportForFlightPark != model.FlightId)
+            if(lastAirportForFlightPark != lastAirportForCrew || lastAirportForFlightPark != _flightService.GetFlight(model.FlightId).FromIATA)
                 ModelState.AddModelError("FlightId", "Please, check airport data in crew or flight park. They must be equal");
 
             if(model.DateTime < lastDateForCrew || model.DateTime < lastDateForFlightPark)
