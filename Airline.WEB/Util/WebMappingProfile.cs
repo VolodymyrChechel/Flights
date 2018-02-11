@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Airline.BLL.DTO;
+using Airline.Common.Enums;
 using Airline.WEB.Models;
 using AutoMapper;
 
@@ -16,9 +17,12 @@ namespace Airline.WEB.Util
             CreateMap<FlightDto, FlightViewModel>().
             AfterMap((s, d) =>
                 {
+                    var dt = s.PlannedDepartureTime;
+                    var dateTime = DateTime.Today.Add(dt);
+                   d.PlannedDepartureTime = dateTime.ToString("hh:mm tt");
                     var ft = s.PlannedFlightTime;
-                d.PlannedFlightTime = ft.ToString(@"hh\:mm");
-            });
+                    d.PlannedFlightTime = string.Format("{0:00}:{1:00}", ft.Hours, ft.Minutes);
+                });
             CreateMap<FlightViewModel, FlightDto>().
                 AfterMap((s, d) => d.PlannedFlightTime = TimeSpan.Parse(s.PlannedFlightTime));
 
@@ -30,6 +34,16 @@ namespace Airline.WEB.Util
                     .Concat(s.SelectedRadioOperators).Concat(s.SelectedNavigatorOfficers).ToList();
             });
             CreateMap<CrewDto, ShowCrewModel>();
+            CreateMap<TimetableCreateModel, TimetableDto>().AfterMap((s, d) =>
+            {
+                if (s.CrewId == null)
+                    d.ApplicationStatus = ApplicationStatus.Attention;
+                else
+                    d.ApplicationStatus = ApplicationStatus.New;
+            });
+
+            CreateMap<TimetableDto, TimetableModel>();
+            CreateMap<TimetableModel, TimetableDto>();
         }
     }
 }

@@ -25,7 +25,6 @@ namespace Airline.WEB.Controllers
         [MessageFromTempData]
         public ActionResult List()
         {
-            Airline.Common.NLog.NLog.LogError(typeof(int), "in list sho tyt govorit");
             var workerDtos = _service.GetWorkers();
             var workers = Mapper.Map<IEnumerable<WorkerDto>, IEnumerable<WorkerViewModel>>(workerDtos);
             

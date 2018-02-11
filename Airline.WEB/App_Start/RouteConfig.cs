@@ -16,7 +16,8 @@ namespace Airline.WEB
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Worker", action = "List", id = UrlParameter.Optional }
+                defaults: new { controller = "Worker", action = "List", id = UrlParameter.Optional },
+                namespaces: new[] { "Airline.WEB.Controllers" }
             );
         }
     }

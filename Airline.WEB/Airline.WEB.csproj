@@ -182,6 +182,8 @@
     <Content Include="Content\bootstrap-datepicker3.css.map" />
     <Content Include="Content\bootstrap-datepicker.standalone.css.map" />
     <Content Include="Content\bootstrap-datepicker.css.map" />
+    <Content Include="Areas\Admin\Views\Timetable\List.cshtml" />
+    <Content Include="Areas\Admin\Views\Timetable\Create.cshtml" />
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
@@ -316,6 +318,7 @@
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="App_Start\TimeSpanValueProviderFactory.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\TimetableController.cs" />
     <Compile Include="Areas\Dispatcher\DispatcherAreaRegistration.cs" />
     <Compile Include="Binders\TimeSpanBinder.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -381,6 +384,8 @@
     <Content Include="Views\Crew\Create.cshtml" />
     <Content Include="Views\Timetable\List.cshtml" />
     <Content Include="Views\Timetable\Create.cshtml" />
+    <Content Include="Views\Home\Error.cshtml" />
+    <Content Include="Views\Timetable\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -390,7 +395,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Controllers\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Areas\Dispatcher\Controllers\" />

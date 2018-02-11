@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using Airline.BLL.DTO;
 using Airline.BLL.Infrastructure;
@@ -26,7 +27,7 @@ namespace Airline.BLL.Services
 
         public IEnumerable<FlightDto> GetFlights()
         {
-            var flights = Database.Flights.GetAll().ToList();
+            var flights = Database.Flights.GetAll().Include(f => f.From).Include(f => f.To);
             var flightDtos = Mapper.Map<IEnumerable<Flight>, IEnumerable<FlightDto>>(flights);
             return flightDtos;
         }

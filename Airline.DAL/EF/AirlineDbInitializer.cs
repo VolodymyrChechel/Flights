@@ -50,7 +50,14 @@ namespace Airline.DAL.EF
             db.Workers.Add(new Worker() { Name = "Stepan", Surname = "Avramenko", BirthDate = DateTime.Parse("1980-12-21"), PhoneNumber = "+380671767544", CrewmanType = CrewmanType.RadioOperator });
             db.Workers.Add(new Worker() { Name = "Yakiv", Surname = "Savaryn", BirthDate = DateTime.Parse("1974-10-24"), PhoneNumber = "+380962085632", CrewmanType = CrewmanType.RadioOperator });
 
-            db.Workers.Add(new Worker() { Name = "Alla", Surname = "Dudnik", BirthDate = DateTime.Parse("1992-4-27"), PhoneNumber = "+380935892850", CrewmanType = CrewmanType.AirHostess });
+            db.Workers.Add(new Worker() { Name = "Zoya", Surname = "Holub", BirthDate = DateTime.Parse("1992-4-27"), PhoneNumber = "+380931892850", CrewmanType = CrewmanType.AirHostess });
+            db.Workers.Add(new Worker() { Name = "Valentyna", Surname = "Dudnik", BirthDate = DateTime.Parse("1992-4-27"), PhoneNumber = "+380935892850", CrewmanType = CrewmanType.AirHostess });
+            db.Workers.Add(new Worker() { Name = "Valentyna", Surname = "Hryshchuk", BirthDate = DateTime.Parse("1992-4-27"), PhoneNumber = "+380936592850", CrewmanType = CrewmanType.AirHostess });
+            db.Workers.Add(new Worker() { Name = "Alla", Surname = "Dzubenko", BirthDate = DateTime.Parse("1992-4-27"), PhoneNumber = "+380935856850", CrewmanType = CrewmanType.AirHostess });
+            db.Workers.Add(new Worker() { Name = "Kseniya", Surname = "Yevdokymenko", BirthDate = DateTime.Parse("1992-4-27"), PhoneNumber = "+380935912850", CrewmanType = CrewmanType.AirHostess });
+            db.Workers.Add(new Worker() { Name = "Liliya", Surname = "Gura", BirthDate = DateTime.Parse("1992-4-27"), PhoneNumber = "+380935897750", CrewmanType = CrewmanType.AirHostess });
+            db.Workers.Add(new Worker() { Name = "Alla", Surname = "Kovalenko", BirthDate = DateTime.Parse("1992-4-27"), PhoneNumber = "+380935152850", CrewmanType = CrewmanType.AirHostess });
+            db.Workers.Add(new Worker() { Name = "Inna", Surname = "Lukyanenko", BirthDate = DateTime.Parse("1992-4-27"), PhoneNumber = "+380935896650", CrewmanType = CrewmanType.AirHostess });
             db.Workers.Add(new Worker() { Name = "Veronika", Surname = "Danilenko", BirthDate = DateTime.Parse("1993-3-3"), PhoneNumber = "+380632237795", CrewmanType = CrewmanType.AirHostess });
             db.Workers.Add(new Worker() { Name = "Larysa", Surname = "Holub", BirthDate = DateTime.Parse("1990-8-5"), PhoneNumber = "+380963273067", CrewmanType = CrewmanType.AirHostess });
             db.Workers.Add(new Worker() { Name = "Zoya", Surname = "Vovk", BirthDate = DateTime.Parse("1989-6-15"), PhoneNumber = "+380501710565", CrewmanType = CrewmanType.AirHostess });

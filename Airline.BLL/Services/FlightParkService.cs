@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Airline.BLL.DTO;
 using Airline.BLL.Interfaces;
 using Airline.DAL.Entities;
@@ -21,6 +22,21 @@ namespace Airline.BLL.Services
             var parks = Database.FlightParks.GetAll();
             var parkDtos = Mapper.Map<IEnumerable<FlightPark>, IEnumerable<FlightParkDto>>(parks);
             return parkDtos;
+        }
+
+        public FlightParkDto GetFlightPark(object key)
+        {
+            if (key == null)
+                throw new ArgumentException("Flight park's id was not set");
+
+            var park = Database.FlightParks.Get(key);
+
+            if (park == null)
+                throw new ArgumentException($"Flight park with key={key} was not found");
+
+            var parkDto = Mapper.Map<FlightPark, FlightParkDto>(park);
+
+            return parkDto;
         }
     }
 }

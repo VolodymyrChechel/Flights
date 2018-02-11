@@ -7,12 +7,11 @@ using Airline.BLL.DTO;
 using Airline.BLL.Interfaces;
 using Airline.BLL.Services;
 using Airline.Common.Enums;
-using Airline.WEB.Filters;
 using Airline.WEB.Models;
 using Airline.WEB.Util;
 using AutoMapper;
 
-namespace Airline.WEB.Controllers
+namespace Airline.WEB.Areas.Admin.Controllers
 {
     public class TimetableController : Controller
     {
@@ -32,63 +31,16 @@ namespace Airline.WEB.Controllers
             _flightParkService = flightParkService;
         }
 
-        [MessageFromTempData]
+        // GET: Timetable
         public ActionResult List(SearchViewModel searchModel)
         {
-         //   if (searchModel == null)
+            //   if (searchModel == null)
 
-                var timetableDtos = _service.GetTimetables();
-                var timetables = Mapper.Map<IEnumerable<TimetableDto>, IEnumerable<TimetableModel>>(timetableDtos);
+            var timetableDtos = _service.GetTimetables();
+            var timetables = Mapper.Map<IEnumerable<TimetableDto>, IEnumerable<TimetableModel>>(timetableDtos);
 
-                var timetableViewModel = new TimetableViewModel {TimetableList = timetables};
-                return View(timetableViewModel);
-        }
-
-        [HttpGet]
-        public ActionResult Edit(int? id)
-        {
-            try
-            {
-                var timetableDto = _service.GetTimetable(id);
-                var model = Mapper.Map<TimetableDto, TimetableCreateModel>(timetableDto);
-
-                FillTimetableCreateModel(model);
-
-                return View(model);
-            }
-            catch (Exception e)
-            {
-                TempData["Message"] = e.Message;
-            }
-            RedirectToAction("List");
-        }
-
-        [HttpPost]
-        public ActionResult Edit(TimetableCreateModel model)
-        {
-            if (model.CrewId != null)
-            {
-                var crewCompositionOfCrew = _crewService.GetCrew(model.CrewId).CrewCompositionId;
-                var crewCompositionOfFlightPark = _flightParkService.GetFlightPark(model.FlightParkId).CrewCompositionId;
-
-                if (crewCompositionOfCrew == crewCompositionOfFlightPark)
-                    ModelState.AddModelError("FlightParkId",
-                        "Selected flight park and selected crew has different compostion");
-            }
-
-            if (model.DateTime < DateTime.UtcNow.AddHours(3))
-                ModelState.AddModelError("DateTime", "It's too late timetable schedule for this time");
-
-            if (ModelState.IsValid)
-            {
-                var timetableDto = Mapper.Map<TimetableCreateModel, TimetableDto>(model);
-                _service.EditTimetable(timetableDto);
-                TempData["Message"] = $"Timetable {model.Id} was edited";
-                return RedirectToAction("List");
-            }
-
-            FillTimetableCreateModel(model);
-            return View(model);
+            var timetableViewModel = new TimetableViewModel { TimetableList = timetables };
+            return View(timetableViewModel);
         }
 
         [HttpGet]

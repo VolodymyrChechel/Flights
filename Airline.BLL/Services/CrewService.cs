@@ -31,7 +31,7 @@ namespace Airline.BLL.Services
                 var workers = crew.Workers;
                 foreach (var worker in workers)
                 {
-                    workerSummary += worker.Name + " " + worker.Surname + " ";
+                    workerSummary += worker.Surname + " ";
                 }
 
                 crewDtos.Add(new CrewDto
@@ -45,7 +45,22 @@ namespace Airline.BLL.Services
 
         public CrewDto GetCrew(object key)
         {
-            throw new System.NotImplementedException();
+            var crew = Database.Crews.Get(key);
+            var crewDto = new CrewDto();
+
+                string workerSummary = $"{crew.Id}";
+                var workers = crew.Workers;
+                foreach (var worker in workers)
+                {
+                    workerSummary += worker.Surname + " ";
+                }
+
+ return new CrewDto
+                {
+                    Id = crew.Id,
+                    CrewCompositionId = crew.CrewCompositionId,
+                    WorkersDescription = workerSummary
+                };
         }
         
         public IEnumerable<CrewCompostionDto> GetCrewCompositions()

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
 using Airline.BLL.DTO;
 using Airline.BLL.Infrastructure;
 using Airline.BLL.Interfaces;
@@ -25,7 +27,8 @@ namespace Airline.BLL.Services
 
         public IEnumerable<TimetableDto> GetTimetables()
         {
-            var timetables = Database.Timetables.GetAll();
+            var timetables = Database.Timetables.GetAll().Include(x => x.Flight);
+
             var timetableDtos = Mapper.Map<IEnumerable<Timetable>, IEnumerable<TimetableDto>>(timetables);
             return timetableDtos;
         }

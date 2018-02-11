@@ -26,7 +26,6 @@ namespace Airline.WEB.Controllers
         [MessageFromTempData]
         public ActionResult List()
         {
-            
             var flightDtos = _service.GetFlights();
             var flights = Mapper.Map<IEnumerable<FlightDto>, IEnumerable<FlightViewModel>>(flightDtos);
 
@@ -40,7 +39,7 @@ namespace Airline.WEB.Controllers
 
             ViewBag.AirportSelectList = UtilMethods.CreateListOfSelectItems(airports, airport => airport.IATA, airport => airport.Name);
 
-            return View(new FlightViewModel {PlannedDepartureTime = TimeSpan.MinValue});
+            return View(new FlightViewModel());
         }
 
         [HttpPost]
@@ -48,12 +47,20 @@ namespace Airline.WEB.Controllers
         {
             if (ModelState.IsValid)
                 {
-                    var flightDto = Mapper.Map<FlightViewModel, FlightDto>(flight);
+                    try
+                    {
+                        var flightDto = Mapper.Map<FlightViewModel, FlightDto>(flight);
 
-                    _service.CreateFlight(flightDto);
+                        _service.CreateFlight(flightDto);
 
-                    TempData["Message"] = $"New flight from {flight.FromIATA} to {flight.ToIATA} at {flight.PlannedDepartureTime} was created succesfully";
-                    return RedirectToAction("List");
+                        TempData["Message"] =
+                            $"New flight from {flight.FromIATA} to {flight.ToIATA} at {flight.PlannedDepartureTime} was created succesfully";
+                        return RedirectToAction("List");
+                    }
+                    catch (Exception e)
+                    {
+                        ModelState.AddModelError("", e.Message);
+                    }
                 }
 
             var airports = _airportService.GetAirports();

@@ -22,8 +22,9 @@ namespace Airline.WEB
         protected void Application_Error(object sender, EventArgs e)
         {
             Exception exception = Server.GetLastError();
+            Airline.Common.NLog.NLog.LogError(sender.GetType(), exception.Message + "\n" + exception.StackTrace);
             Server.ClearError();
-            //Response.("Error");
+            Response.Redirect("~/Home/Error");
         }
     }
 }

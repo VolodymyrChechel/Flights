@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using Airline.Common.Enums;
 using Airline.Common.StaticData;
 using Airline.WEB.Validators;
+using Newtonsoft.Json;
 
 namespace Airline.WEB.Models
 {
@@ -22,9 +23,10 @@ namespace Airline.WEB.Models
         public string ToName { get; set; }
 
         [Required]
-        public TimeSpan PlannedDepartureTime { get; set; }
+        public string PlannedDepartureTime { get; set; } = "12:00 AM";
+
         [Required]
         [RegularExpression(ValidationRegex.Time, ErrorMessage = "Duration has no appropriate format XX:XX")]
-        public string PlannedFlightTime { get; set; }
+        public string PlannedFlightTime { get; set; } = "1:00";
     }
 }
