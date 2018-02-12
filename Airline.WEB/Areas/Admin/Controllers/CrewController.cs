@@ -12,7 +12,7 @@ using Airline.WEB.Models;
 using Airline.WEB.Util;
 using AutoMapper;
 
-namespace Airline.WEB.Controllers
+namespace Airline.WEB.Areas.Admin.Controllers
 {
     /// <summary>
     /// Controller for creating new crews
@@ -72,6 +72,8 @@ namespace Airline.WEB.Controllers
 
             return RedirectToAction("List");
         }
+
+
 
         [HttpGet]
         public ActionResult Delete(int? id)

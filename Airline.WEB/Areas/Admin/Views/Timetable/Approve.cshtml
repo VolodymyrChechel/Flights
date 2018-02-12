@@ -1,0 +1,30 @@
+﻿@model TimetableModel
+@{
+    ViewBag.Title = "Approve timetable";
+}
+
+<div class="row">
+    <div class="header col-12">
+        <h3 class="float-left">
+            @Html.ActionLink("Datetable list", "List") / @ViewBag.Title
+    </h3>
+</div>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        <div class=""> @Model.Id from @Model.FlightFromName to @Model.FlightToName</div>
+        <div> at @Model.DateTime </div>
+    </div>
+
+    <div class="form-group">
+        <div>Do you really want to approve this timetable item?</div>
+        <div>
+            <input type="submit" value="Approve" class="btn btn-danger" /> |
+            @Html.ActionLink("Back to list", "List")
+        </div>
+    </div>
+}

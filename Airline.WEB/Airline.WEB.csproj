@@ -182,14 +182,20 @@
     <Content Include="Content\bootstrap-datepicker3.css.map" />
     <Content Include="Content\bootstrap-datepicker.standalone.css.map" />
     <Content Include="Content\bootstrap-datepicker.css.map" />
-    <Content Include="Areas\Admin\Views\Timetable\List.cshtml" />
-    <Content Include="Areas\Admin\Views\Timetable\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Worker\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Worker\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\Worker\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Worker\List.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\Timetable\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Timetable\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Timetable\List.cshtml" />
+    <Content Include="Areas\Admin\Views\Crew\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Crew\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Crew\List.cshtml" />
+    <Content Include="Areas\Admin\Views\Timetable\Approve.cshtml" />
+    <Content Include="Areas\Admin\Views\Timetable\Delete.cshtml" />
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
@@ -329,11 +335,9 @@
     <Compile Include="Areas\Dispatcher\DispatcherAreaRegistration.cs" />
     <Compile Include="Binders\TimeSpanBinder.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\CrewController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CrewController.cs" />
     <Compile Include="Areas\Admin\Controllers\FlightController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\TimetableController.cs" />
-    <Compile Include="Controllers\WorkerController.cs" />
     <Compile Include="Filters\MessageFromTempData.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -383,13 +387,7 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Areas\Admin\Views\Flight\Delete.cshtml" />
-    <Content Include="Views\Crew\List.cshtml" />
-    <Content Include="Views\Crew\Create.cshtml" />
-    <Content Include="Views\Timetable\List.cshtml" />
-    <Content Include="Views\Timetable\Create.cshtml" />
     <Content Include="Views\Home\Error.cshtml" />
-    <Content Include="Views\Timetable\Edit.cshtml" />
-    <Content Include="Views\Crew\Delete.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

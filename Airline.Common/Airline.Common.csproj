@@ -45,6 +45,8 @@
   <ItemGroup>
     <Compile Include="Enums\ApplicationStatus.cs" />
     <Compile Include="Enums\CrewmanType.cs" />
+    <Compile Include="Enums\SelectionField.cs" />
+    <Compile Include="Enums\SortOptions.cs" />
     <Compile Include="NLog\NLog.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StaticData\ValidationRegex.cs" />

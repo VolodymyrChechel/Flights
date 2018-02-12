@@ -1,4 +1,5 @@
-﻿@model TimetableViewModel
+﻿@using Airline.Common.Enums
+@model TimetableViewModel
 @{
     ViewBag.Title = "Timetable list";
 }
@@ -10,49 +11,98 @@
     </div>
 </div>
 
-<div class="row">
-    <div class=" header col-12">
-        @using (Html.BeginForm())
-        {
-            @Html.EnumDropDownListFor(m=>m.SearchModel.Selection)
-
-            @Html.EditorFor(m=>m.SearchModel.SelectionKeyword)
-            @Html.EditorFor(m=>m.SearchModel.SortField)
-            <input type="submit">
-        }
-    </div>
-</div>
-
 <p class="text-info"> @ViewBag.Message </p>
+
+
+@using (Html.BeginForm("List", "Timetable", FormMethod.Get))
+{
+    <div class="form-row">
+        @Html.LabelFor(m => m.SearchModel.SelectionKeyword, new { @class = "col-form-label col-sm-2" })
+        @Html.EnumDropDownListFor(m => m.SearchModel.Selection, "Choose select field", new { @class = "custom-select form-control col-sm-2" })
+        @Html.EditorFor(m => m.SearchModel.SelectionKeyword, new { htmlAttributes = new { @class = "form-control col-sm-4" } })
+        <div class="col-sm-3">
+            <input type="submit"  id="selectButton" value="Select by keyword" class="btn btn-info">
+            </div>
+    </div>
+}
+
+@using (Html.BeginForm("List", "Timetable", FormMethod.Get))
+{
+    <div class="form-row">
+        @Html.LabelFor(m => m.SearchModel.SearchKeyword, new { @class = "col-form-label col-sm-2" })
+        @Html.EditorFor(m => m.SearchModel.SearchKeyword, new { htmlAttributes = new { @class = "form-control col-sm-6" } })
+        <div class="col-sm-3">
+            <input type="submit" id="searchButton" value="Search" class="btn btn-info">
+        </div>
+    </div>
+}
+
+@using (Html.BeginForm("List", "Timetable", FormMethod.Get))
+{
+    <div class="form-row">
+        @Html.LabelFor(m => m.SearchModel.SortField, new { @class = "col-form-label col-sm-2" })
+        @Html.EnumDropDownListFor(m => m.SearchModel.SortField, "Choose sort field", new { @class = "custom-select form-control col-sm-2" })
+
+        <div class="col-sm-3">
+            <input type="submit" id="sortButton" value="Sort by field" class="btn btn-info">
+        </div>
+    </div>
+}
 
 <table class="table table-striped table-hover">
     <thead class="thead-dark">
         <tr>
             <th>Id</th>
+            <th>Flight name</th>
             <th> From </th>
             <th> To </th>
             <th> Planned departure time </th>
             <th> Application status </th>
+            <th> </th>
+            <th> </th>
         </tr>
     </thead>
     @foreach (var item in @Model.TimetableList)
     {
-        <tr class="clickable-row" data-href="@Url.Action("Edit", "Flight", new {id=item.Id})">
+        <tr class="clickable-row" data-href="@Url.Action("Edit", "Timetable", new {id=item.Id})">
             <td>@item.Id</td>
-            <td>@item.FlightFromIATA</td>
-            <td>@item.FlightToIATA</td>
+            <td>@item.FlightId</td>
+            <td>@item.FlightFromIATA (@item.FlightFromName)</td>
+            <td>@item.FlightToIATA (@item.FlightToName)</td>
             <td>@item.DateTime</td>
             <td>@item.ApplicationStatus</td>
+            <td>
+                @if (item.ApplicationStatus == ApplicationStatus.New)
+                {
+                    <a href="@Url.Action("Approve", new {id = item.Id})" class="btn btn-primary">
+                        <span class="fa fa-check"></span>
+                        Approve
+                    </a>
+                }
+                @if (item.ApplicationStatus == ApplicationStatus.Attention)
+                {
+                    <a href="@Url.Action("Resolve", new {id = item.Id})" class="btn btn-primary">
+                        <span class="fa fa-edit"></span>
+                        Resolve
+                    </a>
+                }
+            </td>
+            <td>
+                <a href="@Url.Action("Delete", new {id = item.Id})" class="btn btn-danger">
+                    <span class="fa fa-trash"></span>
+                    Delete
+                </a>
+            </td>
         </tr>
     }
 </table>
 
 @section Scripts{
     <script>
-        $(document).ready(function() {
-            $(".clickable-row").click(function() {
-                window.location = $(this).data("href");
-            });
-        });
+        //$(document).ready(function() {
+        //    $(".clickable-row").click(function() {
+        //        window.location = $(this).data("href");
+        //    });
+        //});
     </script>
 }
