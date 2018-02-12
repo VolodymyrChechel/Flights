@@ -51,6 +51,25 @@ namespace Airline.WEB.Areas.Admin.Controllers
             return View(timetableViewModel);
         }
 
+        [MessageFromTempData]
+        public ActionResult Table(SearchViewModel searchModel)
+        {
+            IEnumerable<TimetableDto> timetableDtos = null;
+
+            if (searchModel.SearchKeyword != null)
+                timetableDtos = _service.GetSearchedTimetables(searchModel.SelectionKeyword);
+            else if (searchModel.SelectionKeyword != null)
+                timetableDtos = _service.GetSelectedTimetables(searchModel.Selection, searchModel.SelectionKeyword);
+            else if (searchModel.SortField != SortOptions.NoSelect)
+                timetableDtos = _service.GetSortedTimetables(searchModel.SortField);
+            else timetableDtos = _service.GetTimetables();
+
+            var timetables = Mapper.Map<IEnumerable<TimetableDto>, IEnumerable<TimetableModel>>(timetableDtos);
+
+            var timetableViewModel = new TimetableViewModel { TimetableList = timetables };
+            return PartialView(timetableViewModel);
+        }
+
         [HttpGet]
         public ActionResult Approve(int? id)
         {

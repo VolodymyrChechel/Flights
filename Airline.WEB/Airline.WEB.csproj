@@ -196,6 +196,7 @@
     <Content Include="Areas\Admin\Views\Crew\List.cshtml" />
     <Content Include="Areas\Admin\Views\Timetable\Approve.cshtml" />
     <Content Include="Areas\Admin\Views\Timetable\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Timetable\Table.cshtml" />
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>

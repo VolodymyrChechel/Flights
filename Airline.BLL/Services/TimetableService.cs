@@ -73,6 +73,7 @@ namespace Airline.BLL.Services
             }
             else if (selectionField == SelectionField.Date)
             {
+                var test = DateTime.ToString("MM/dd/yyyy");
                 timetables = timetables.Where(x => x.DateTime.ToString("MM/dd/yyyy") == selectKeyword);
             }
 
@@ -82,7 +83,7 @@ namespace Airline.BLL.Services
 
         public IEnumerable<TimetableDto> GetSearchedTimetables(string searchWord)
         {
-            var timetables = Database.Timetables.GetAll().Include(x => x.Flight.From).Include(x => x.Flight.To)
+            var timetables = Database.Timetables.GetAll().Include(x => x.Flight.From).Include(x => x.Flight.To).Include(x => x.Flight)
                 .Where(x => x.Flight.Id.ToUpper().Contains(searchWord.ToUpper()));
 
             var timetableDtos = Mapper.Map<IEnumerable<Timetable>, IEnumerable<TimetableDto>>(timetables);

@@ -49,60 +49,35 @@
     </div>
 }
 
-<table class="table table-striped table-hover">
-    <thead class="thead-dark">
-        <tr>
-            <th>Id</th>
-            <th>Flight name</th>
-            <th> From </th>
-            <th> To </th>
-            <th> Planned departure time </th>
-            <th> Application status </th>
-            <th> </th>
-            <th> </th>
-        </tr>
-    </thead>
-    @foreach (var item in @Model.TimetableList)
-    {
-        <tr class="clickable-row" data-href="@Url.Action("Edit", "Timetable", new {id=item.Id})">
-            <td>@item.Id</td>
-            <td>@item.FlightId</td>
-            <td>@item.FlightFromIATA (@item.FlightFromName)</td>
-            <td>@item.FlightToIATA (@item.FlightToName)</td>
-            <td>@item.DateTime</td>
-            <td>@item.ApplicationStatus</td>
-            <td>
-                @if (item.ApplicationStatus == ApplicationStatus.New)
-                {
-                    <a href="@Url.Action("Approve", new {id = item.Id})" class="btn btn-primary">
-                        <span class="fa fa-check"></span>
-                        Approve
-                    </a>
-                }
-                @if (item.ApplicationStatus == ApplicationStatus.Attention)
-                {
-                    <a href="@Url.Action("Resolve", new {id = item.Id})" class="btn btn-primary">
-                        <span class="fa fa-edit"></span>
-                        Resolve
-                    </a>
-                }
-            </td>
-            <td>
-                <a href="@Url.Action("Delete", new {id = item.Id})" class="btn btn-danger">
-                    <span class="fa fa-trash"></span>
-                    Delete
-                </a>
-            </td>
-        </tr>
-    }
-</table>
+<div id="tabl">
+    @Html.Partial("Table")
+</div>
 
 @section Scripts{
     <script>
-        //$(document).ready(function() {
-        //    $(".clickable-row").click(function() {
-        //        window.location = $(this).data("href");
-        //    });
-        //});
+        @*$(document).ready(function () {
+            $('#sortButton').click(function (e) {
+                e.preventDefault();
+                var name = $('#SearchModel_SortField').val();
+                name = encodeURIComponent(name);
+                console.log(name);
+                var ref = '@Url.Action("Table", "Timetable")?SearchModel.SortField=' + name;
+                console.log(ref);
+
+                $('#tabl').load(ref);
+            });
+
+            $('#searchButton').click(function (e) {
+                e.preventDefault();
+                var name = $('#SearchModel_SearchKeyword').val();
+                name = encodeURIComponent(name);
+                console.log(name);
+           //     var ref = '@Url.Action("Table", "Timetable")?SearchModel.SearchKeyword=' + name;
+                var ref = 'https://www.google.com';
+                console.log(ref);
+
+                $('#tabl').load(ref);
+            });
+        });*@
     </script>
 }
